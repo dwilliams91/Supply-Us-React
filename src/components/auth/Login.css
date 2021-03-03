@@ -1,0 +1,38 @@
+.loginContainer {
+    min-height: 600px;
+    max-height: 600px;
+    background-color: #007cba;
+    margin: 0px 50px 0px 50px;
+    border-radius: 25px;
+    padding: 10%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.loginCard{
+    padding:25px;
+    background-color: white;
+    border-radius: 25px;
+    flex-basis: 40%;
+}
+/* .loginCard >fieldset{
+    margin:5px;
+} */
+
+.registerContainer{
+    min-height: 700px;
+    max-height: 700px;
+    background-color: #007cba;
+    margin: 0px 50px 0px 50px;
+    border-radius: 25px;
+    padding: 10%;
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+.registerCard{
+    padding:25px;
+    background-color: white;
+    border-radius: 25px;
+    flex-basis: 40%;
+}

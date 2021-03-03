@@ -1,0 +1,26 @@
+.AddItemContainer{
+    min-height: 600px;
+    padding-top: 20px;
+    background-color: #007cba;
+    margin: 0px 50px 0px 50px;
+    border-radius: 25px;
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background: rgba(0, 124, 186, 0.9)
+
+}
+.AddEditCard{
+    background-color: white;
+    padding:1px;
+    border-radius: 25px;
+    padding:10px;
+    min-width: 20em
+}
+.AddEditCard >h3{
+    text-align: center;
+}
+.AddEditCard:Hover{
+    box-shadow: 5px 5px 0px 2px #00a5d4;
+
+}

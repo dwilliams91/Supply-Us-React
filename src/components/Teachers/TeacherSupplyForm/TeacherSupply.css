@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+.TeacherSupplyContainer{
+    min-height: 600px;
+    padding-top: 20px;
+    background-color: #007cba;
+    margin: 0px 25px 0px 25px;
+    border-radius: 25px;
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background: rgba(0, 124, 186, 0.9)
+
+}
+.SupplyFormContainer{
+    flex-basis: 33%;
+    min-height: 500px;
+    max-height: 500px;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px;
+    overflow:scroll;
+
+}
+
+.TeacherSupplyTableContainer{
+    flex-basis: 60%;
+    border:1px solid black;
+    max-height: 500px;
+    overflow: scroll;
+    background-color: white;
+    border-radius: 25px;
+    padding: 10px;
+}
+.TeacherFieldSet{
+    margin:2px;
+    padding: 10px;
+    border-radius: 15px;
+}
+.TeacherTableHead{
+    border-bottom:1px solid black;
+    padding:5px;
+    text-align: left;
+}
+.tableColumn{
+    border-bottom:1px solid black;
+    min-height:20px
+}
+
+table{
+    table-layout: auto;
+    width:100%;
+    border-collapse: collapse;
+
+}
+.Name{
+    padding: 20px;
+}
+
+.descriptionFormGroup{
+    display:flex;
+    flex-direction: column;
+}
+textarea{
+    min-height: 50px;
+}
+.flexLogoutButton{
+    display:flex;
+    flex-direction: column;
+}
+.borderAround{
+    border:1px solid #007cba;
+    padding: 2px;
+    /* border-radius: 25px;
+    padding:7px */
+
+}
+.addPadding{
+    margin-top: 5px;
+}
+.teacherBackground{
+    
+    background-size: contain;
+    background-image: url("https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1104&q=80");
+}

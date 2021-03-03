@@ -1,0 +1,73 @@
+.classCardContainer{
+    min-height: 500px;
+    padding-top: 20px;
+    background-color: #007cba;
+    margin: 0px 50px 0px 50px;
+    border-radius: 25px;;
+    background: rgba(0, 124, 186, 0.9)
+
+}
+.classCardFlex{
+    display:flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    padding: 0px 10px 0px 10px;
+}
+
+.classCard{
+    border-radius: 25px;
+    border: 1px solid #00a5d4;
+    flex-basis: 20%;
+    padding:20px;
+    background-color:white;
+    min-height: 100px;
+}
+.classCard:hover{
+    box-shadow: 5px 5px 0px 0px #00a5d4;
+}
+.addClassCardContainer{
+    min-height: 500px;
+    padding-top: 20px;
+    background-color: #007cba;
+    margin: 0px 50px 0px 50px;
+    border-radius: 25px;
+    display:flex;
+    justify-content: space-evenly;
+    background: rgba(0, 124, 186, 0.9)
+
+}
+
+.addClassCard{
+    background-color: white;
+    border-radius: 25px;
+    max-height: 12em;
+    padding: 10px;
+    min-width: 30em;
+    border:2px solid #005a87
+}
+.addClassCard:hover{
+    box-shadow: 5px 5px 0px 5px #00a5d4;
+
+}
+
+
+.TeacherClassForm{
+    display:flex;
+    flex-direction: column ;
+}
+
+
+#classPicture{
+    max-width: 30em;
+    border:2px solid #005a87;
+    border-radius: 25px;
+}
+.h1Background{
+    margin-left:20px;
+    margin-top:3px;
+    background-color: white;
+    max-width: 350px;
+    border-radius: 25px;
+    padding:3px;
+}
+
