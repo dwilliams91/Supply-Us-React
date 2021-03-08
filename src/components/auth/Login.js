@@ -31,6 +31,7 @@ export const Login = props => {
                     history.push("/teachers")
                 }
                 else {
+                    console.log("hi")
                     invalidDialog.current.showModal()
                 }
             })
