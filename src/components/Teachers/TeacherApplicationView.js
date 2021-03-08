@@ -14,8 +14,8 @@ import { TeacherAddItem } from "./TeacherAddItem/TeacherAddItem"
 import {TeacherSupply} from "./TeacherSupply"
 
 export const TeacherApplicationView = (props) => {
-    const userType=parseInt(localStorage.getItem("userType"))
-    console.log("userType", userType)
+    // const userType=parseInt(localStorage.getItem("userType"))
+    // console.log("userType", userType)
     // if (userType ===2){
     //     props.history.push("/customers")
     // }

@@ -17,7 +17,7 @@ export const TeacherClass = ({myClass}) => {
                 chosenClass:myClass
             }
                 }}>
-                { myClass.name }
+                { myClass.class_name }
             </Link>
         </h3>
         <Button variant="outline-primary" onClick={()=>deleteClassList(myClass.id)}>Delete</Button>
