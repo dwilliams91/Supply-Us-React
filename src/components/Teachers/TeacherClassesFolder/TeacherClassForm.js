@@ -13,8 +13,7 @@ export const TeacherClassForm = (props) => {
     const constructNewClass = () => {
         const newClass =
         {
-            name: name.current.value,
-            userId: user
+            class_name: name.current.value,
         }
         addClassList(newClass).then(() => props.history.push("/teachers"))
     }
