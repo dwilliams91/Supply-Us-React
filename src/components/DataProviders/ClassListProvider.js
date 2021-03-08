@@ -12,14 +12,13 @@ export const ClassListProvider = (props) => {
         return fetch("http://localhost:8000/classlists", {
             headers: {
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
-              }
+            }
         })
             .then(res => res.json())
             .then(setClassLists)
     }
 
     const addClassList = classLists => {
-        console.log(classLists)
         return fetch("http://localhost:8000/classlists", {
             method: "POST",
             headers: {
@@ -31,9 +30,11 @@ export const ClassListProvider = (props) => {
             .then(getClassLists)
     }
     const deleteClassList = classLists => {
-        console.log(classLists)
-        return fetch(`http://localhost:8088/classLists/${classLists}`, {
-            method: "DELETE"
+        return fetch(`http://localhost:8000/classlists/${classLists}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            }
         })
             .then(getClassLists)
     }
