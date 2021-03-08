@@ -10,7 +10,11 @@ export const SupplyItemsProvider = (props) => {
     const [searchTerms, setSearchTerms]=useState("")
 
     const getSupplyItems = () => {
-        return fetch("http://localhost:8088/supplyItems")
+        return fetch("http://localhost:8000/supplyitems",{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            }
+        })
             .then(res => res.json())
             .then(setSupplyItems)
     }
