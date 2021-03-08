@@ -20,10 +20,11 @@ export const ClassListProvider = (props) => {
 
     const addClassList = classLists => {
         console.log(classLists)
-        return fetch("http://localhost:8088/classLists", {
+        return fetch("http://localhost:8000/classlists", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
             },
             body: JSON.stringify(classLists)
         })
