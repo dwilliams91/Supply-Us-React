@@ -27,7 +27,7 @@ export const TeacherClasses = () => {
 
     return (
         <>
-            <div className="h1Background">
+            {/* <div className="h1Background">
             <h1 >My Classes</h1>
             </div>
             <div className="classCardContainer">
@@ -36,7 +36,7 @@ export const TeacherClasses = () => {
                         return <TeacherClass key={singleClass.id} myClass={singleClass}></TeacherClass>
                     })}
                 </div>
-            </div>
+            </div> */}
         </>
     )
 
