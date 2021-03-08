@@ -9,8 +9,11 @@ export const ClassListProvider = (props) => {
     const [classLists, setClassLists] = useState([])
 
     const getClassLists = () => {
-        console.log("does this hit?")
-        return fetch("http://localhost:8088/classLists")
+        return fetch("http://localhost:8000/classlists", {
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+              }
+        })
             .then(res => res.json())
             .then(setClassLists)
     }
