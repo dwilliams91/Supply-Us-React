@@ -10,7 +10,7 @@ import { Form, Row, Col, Button } from "react-bootstrap"
 export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
     const { SupplyTypes, getSupplyTypes } = useContext(SupplyTypeContext)
-    const { SupplyItems, searchTerms, getSupplyItems } = useContext(SupplyItemContext)
+    const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
     const { addClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
 
@@ -38,18 +38,9 @@ export const TeacherSupplyForm = (props) => {
 
     // check to see if the type bar has changed, if it has set the type
     const TypeChangeField = (event) => {
-        setType(event.target.value)
+        getFilterbyTypeSupplyItems(event.target.value)
     }
-    // re-rendering when the type changes. If the type is not 0, filter the item bar
-    useEffect(() => {
-        const selectTypeParsed = parseInt(Type)
-        if (selectTypeParsed === 0) {
-            setFilteredSupplyItems(SupplyItems)
-        } else {
-            setFilteredSupplyItems(SupplyItems.filter(e => e.typeId === selectTypeParsed))
-        }
-        // console.log(Type)
-    }, [Type, SupplyItems])
+
 
     // check to see if the item bar has change, if it has change the item, but not to zero
     const ItemChangeField = (event) => {
@@ -145,7 +136,7 @@ export const TeacherSupplyForm = (props) => {
                             <Form.Label> Search by Type</Form.Label>
                         </Col>
                         <Col sm="">
-                            <Form.Control className="Align-Left" size="sm" as="select" value={Type} id="SupplyType" onChange={TypeChangeField}>
+                            <Form.Control className="Align-Left" size="sm" as="select" id="SupplyType" onChange={TypeChangeField}>
                                 <option value="0">Select Type</option>
                                 {SupplyTypes.map(e => (
                                     <option key={e.id} value={e.id}>
