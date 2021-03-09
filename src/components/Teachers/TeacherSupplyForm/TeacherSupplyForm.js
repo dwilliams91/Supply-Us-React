@@ -14,7 +14,7 @@ export const TeacherSupplyForm = (props) => {
     const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
     const { addClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
-    const {packageType, getPackageTypes}= useContext(PackageTypeContext)
+    const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
 
     // defining the type and Item variables
     const [Type, setType] = useState(0)
@@ -45,7 +45,7 @@ export const TeacherSupplyForm = (props) => {
 
     // check to see if the item bar has change, if it has change the item, but not to zero
     const ItemChangeField = (event) => {
-        let ItemSelected = parseInt(event.target.value)        
+        let ItemSelected = parseInt(event.target.value)
         if (ItemSelected !== 0) {
             setItem(ItemSelected)
             getPackageTypes(event.target.value)
@@ -54,42 +54,6 @@ export const TeacherSupplyForm = (props) => {
         }
     }
 
-    // re-render when there is a change in the item. Find the item to render on the dom by the number input button
-    // useEffect(() => {
-    //     if (Item !== 0) {
-    //         setItemName(SupplyItems.find(e => e.id == parseInt(Item)))
-    //     }
-    // }, [Item])
-
-    // re-render when there is a change in item name, check to see if the item comes in packaging
-    // useEffect(() => {
-    //     if (ItemName.packaging === true) {
-    //         setPackType("Packs of ")
-    //     } else {
-    //         setPackType("Number of ")
-    //     }
-    //     // console.log(packageType)
-
-    // }, [ItemName])
-
-    // Save the item
-    const SaveItem = () => {
-
-        const newItem = {
-            number: ItemQuantity,
-            supplyItemId: Item,
-            description: description,
-            classListId: classId
-        }
-        console.log(newItem)
-        if (parseInt(newItem.supplyItemId) !==0){
-            addClassListSupplyItem(newItem).then(() => setItemQuantity(""))
-        } else {
-            window.alert("Please select an Item")
-
-        }
-    }
-    // this changes the values of the number and the description whenever one of them is changed
     const NumberChangeField = (e) => {
         console.log(e.target.value)
         if (e.target.value) {
@@ -107,60 +71,72 @@ export const TeacherSupplyForm = (props) => {
     const DescriptionChangeField = (e) => {
         setDescription(e.target.value)
     }
+    
 
-    //   this is the search functionality
-    useEffect(() => {
-        if (searchTerms !== "") {
-            const subset = SupplyItems.filter(singleItem => singleItem.name.toLowerCase().includes(searchTerms.toLowerCase()))
-            setFilteredSupplyItems(subset)
-        } else {
-            setFilteredSupplyItems(SupplyItems)
+    
+    const SaveItem = () => {
+
+        const newItem = {
+            number: ItemQuantity,
+            supplyItemId: Item,
+            description: description,
+            classListId: classId
         }
+        console.log(newItem)
+        if (parseInt(newItem.supplyItemId) !== 0) {
+            addClassListSupplyItem(newItem).then(() => setItemQuantity(""))
+        } else {
+            window.alert("Please select an Item")
 
-    }, [searchTerms, SupplyItems])
+        }
+    }
+    // this changes the values of the number and the description whenever one of them is changed
+    
+    
 
     return (
         <>
+        {console.log(packageTypes)}
             <div className="SupplyFormContainer">
                 <div className="borderAround">
-                <Form.Group>
-                    <Row>
-                        <Col sm="">
-                            <Form.Label>Can't find what you are looking for? Narrow the list down by selecting a type or searching.</Form.Label>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="5">
-                            <Form.Label> Search by Type</Form.Label>
-                        </Col>
-                        <Col sm="">
-                            <Form.Control className="Align-Left" size="sm" as="select" id="SupplyType" onChange={TypeChangeField}>
-                                <option value="0">Select Type</option>
-                                {SupplyTypes.map(e => (
-                                    <option key={e.id} value={e.id}>
-                                        {e.type}
-                                    </option>
-                                ))}
-                            </Form.Control>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <ItemSearch></ItemSearch>
-                    </Row>
-                   
-                
-                                </Form.Group>
-                                </div>
+                    <Form.Group>
+                        <Row>
+                            <Col sm="">
+                                <Form.Label>Can't find what you are looking for? Narrow the list down by selecting a type or searching.</Form.Label>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm="5">
+                                <Form.Label> Search by Type</Form.Label>
+                            </Col>
+                            <Col sm="">
+                                <Form.Control className="Align-Left" size="sm" as="select" id="SupplyType" onChange={TypeChangeField}>
+                                    <option value="0">Select Type</option>
+                                    {SupplyTypes.map(e => (
+                                        <option key={e.id} value={e.id}>
+                                            {e.type}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <ItemSearch></ItemSearch>
+                        </Row>
+
+
+                    </Form.Group>
+                </div>
                 <Form.Group>
                     <Row className="addPadding">
                         <Col sm="5">
-                            <h5>Select an Item</h5> 
+                            <h5>Select an Item</h5>
                             {/* <Form.Label ><strong>Select an Item</strong></Form.Label> */}
                         </Col>
                         <Col sm="">
                             <Form.Control size="sm" as="select" name="Item" value={Item} id="SupplyItem" onChange={ItemChangeField} >
                                 <option value="0">Select Item</option>
-                                {filteredSupplyItems.map(e => (
+                                {SupplyItems.map(e => (
                                     <option key={e.id} value={e.id}>
                                         {e.name}
                                     </option>
@@ -168,32 +144,44 @@ export const TeacherSupplyForm = (props) => {
                             </Form.Control>
                         </Col>
                     </Row>
-                
+
                 </Form.Group>
                 <div className="borderAround">
-                <Form.Group>
-                    <Row>
-                        <Col sm="5">
-                            <Form.Label>{packageType} {ItemName.name}</Form.Label>
-                        </Col>
+                    <Form.Group>
+                        <Row>
                         <Col sm="">
-                            <Form.Control size="sm" type="text" name="number" value={ItemQuantity} onChange={NumberChangeField}>
-                            </Form.Control>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Col sm="4">
-                            <Form.Label>Description</Form.Label>
-                        </Col>
+                                <Form.Control className="Align-Left" size="sm" as="select" id="SupplyType" onChange={TypeChangeField}>
+                                    <option value="0">Select Packaging</option>
+                                    {packageTypes.map(e => (
+                                        <option key={e.id} value={e.id}>
+                                            {e.type}
+                                        </option>
+                                    ))}
+                                </Form.Control>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm="5">
+                                <Form.Label>{ItemName.name}</Form.Label>
+                            </Col>
+                            <Col sm="">
+                                <Form.Control size="sm" type="text" name="number" value={ItemQuantity} onChange={NumberChangeField}>
+                                </Form.Control>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col sm="4">
+                                <Form.Label>Description</Form.Label>
+                            </Col>
+                            <Col sm="">
+                                <Form.Control size="sm" as="textarea" name="description" placeholder="Example: Red binders, 3 ring," value={description} onChange={DescriptionChangeField}>
+                                </Form.Control>
+                            </Col>
+                        </Row>
                         <Col sm="">
-                            <Form.Control size="sm" as="textarea" name="description" placeholder="Example: Red binders, 3 ring," value={description} onChange={DescriptionChangeField}>
-                            </Form.Control>
+                            <Form.Label>Here is where you can add any specific information. If they need three binders, the description is where you put the colors or the size</Form.Label>
                         </Col>
-                    </Row>
-                    <Col sm="">
-                        <Form.Label>Here is where you can add any specific information. If they need three binders, the description is where you put the colors or the size</Form.Label>
-                    </Col>
-                </Form.Group>
+                    </Form.Group>
                 </div>
 
                 <Button type="submit" onClick={evt => {

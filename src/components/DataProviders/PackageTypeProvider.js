@@ -6,7 +6,7 @@ export const PackageTypeContext = React.createContext()
 
 export const PackageTypeProvider = (props) => {
 
-    const [PackageTypes, setPackageType] = useState([])
+    const [packageTypes, setPackageType] = useState([])
 
     const getPackageTypes = (item) => {
         return fetch(`http://localhost:8000/packagetypes/${item}/getRelatedPackageTypes`, {
@@ -16,21 +16,13 @@ export const PackageTypeProvider = (props) => {
     })
             .then(res => res.json())
             .then(setPackageType)
+            .then(console.log(packageTypes))
     }
-    const addPackageType = supplyType => {
-        return fetch("http://localhost:8088/supplyTypes", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(supplyType)
-        })
-            .then(getPackageTypes)
-    }
+    
 
     return (
         <PackageTypeContext.Provider value={{
-            PackageTypeProvider, PackageTypes, getPackageTypes, addPackageType
+            PackageTypeProvider, packageTypes, getPackageTypes
         }}>
             {props.children}
         </PackageTypeContext.Provider>
