@@ -57,7 +57,6 @@ export const TeacherSupplyForm = (props) => {
     useEffect(() => {
         if (Item !== 0) {
             setItemName(SupplyItems.find(e => e.id == parseInt(Item)))
-
         }
     }, [Item])
 
@@ -74,7 +73,6 @@ export const TeacherSupplyForm = (props) => {
 
     // Save the item
     const SaveItem = () => {
-
 
         const newItem = {
             number: ItemQuantity,
@@ -103,7 +101,6 @@ export const TeacherSupplyForm = (props) => {
         } else {
             setItemQuantity("")
         }
-
     }
 
     const DescriptionChangeField = (e) => {
@@ -160,7 +157,7 @@ export const TeacherSupplyForm = (props) => {
                             {/* <Form.Label ><strong>Select an Item</strong></Form.Label> */}
                         </Col>
                         <Col sm="">
-                            <Form.Control size="sm" as="select" value={Item} id="SupplyItem" onChange={ItemChangeField} >
+                            <Form.Control size="sm" as="select" name="Item" value={Item} id="SupplyItem" onChange={ItemChangeField} >
                                 <option value="0">Select Item</option>
                                 {filteredSupplyItems.map(e => (
                                     <option key={e.id} value={e.id}>
@@ -179,7 +176,7 @@ export const TeacherSupplyForm = (props) => {
                             <Form.Label>{packageType} {ItemName.name}</Form.Label>
                         </Col>
                         <Col sm="">
-                            <Form.Control size="sm" type="text " value={ItemQuantity} onChange={NumberChangeField}>
+                            <Form.Control size="sm" type="text" name="number" value={ItemQuantity} onChange={NumberChangeField}>
                             </Form.Control>
                         </Col>
                     </Row>
@@ -188,7 +185,7 @@ export const TeacherSupplyForm = (props) => {
                             <Form.Label>Description</Form.Label>
                         </Col>
                         <Col sm="">
-                            <Form.Control size="sm" as="textarea" placeholder="Example: Red binders, 3 ring," value={description} onChange={DescriptionChangeField}>
+                            <Form.Control size="sm" as="textarea" name="description" placeholder="Example: Red binders, 3 ring," value={description} onChange={DescriptionChangeField}>
                             </Form.Control>
                         </Col>
                     </Row>
