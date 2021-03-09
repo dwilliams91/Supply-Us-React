@@ -19,9 +19,9 @@ export const TeacherSupplyForm = (props) => {
     // defining the type and Item variables
     const [Type, setType] = useState(0)
     const [Item, setItem] = useState(0)
+    const [packaging, setPackaging]=useState(0)
     const [ItemName, setItemName] = useState("")
     const [filteredSupplyItems, setFilteredSupplyItems] = useState([])
-    const [ItemNumber, setItemNumber] = useState(0)
     const [description, setDescription] = useState("")
     const [ItemQuantity, setItemQuantity] = useState("")
     // SET UP STATE VARIABLE FOR NUMBER SET TO EMPTY STRING
@@ -71,20 +71,23 @@ export const TeacherSupplyForm = (props) => {
     const DescriptionChangeField = (e) => {
         setDescription(e.target.value)
     }
+    const PackageChangeField = (e) => {
+        setPackaging(e.target.value)
+    }
     
 
     
     const SaveItem = () => {
-
         const newItem = {
             number: ItemQuantity,
             supplyItemId: Item,
             description: description,
-            classListId: classId
+            classListId: classId,
+            packaging: packaging
         }
         console.log(newItem)
         if (parseInt(newItem.supplyItemId) !== 0) {
-            addClassListSupplyItem(newItem).then(() => setItemQuantity(""))
+            // addClassListSupplyItem(newItem).then(() => setItemQuantity(""))
         } else {
             window.alert("Please select an Item")
 
@@ -96,7 +99,6 @@ export const TeacherSupplyForm = (props) => {
 
     return (
         <>
-        {console.log(packageTypes)}
             <div className="SupplyFormContainer">
                 <div className="borderAround">
                     <Form.Group>
@@ -150,7 +152,7 @@ export const TeacherSupplyForm = (props) => {
                     <Form.Group>
                         <Row>
                         <Col sm="">
-                                <Form.Control className="Align-Left" size="sm" as="select" id="SupplyType" onChange={TypeChangeField}>
+                                <Form.Control className="Align-Left" size="sm" as="select" value={packaging} id="SupplyType" onChange={PackageChangeField}>
                                     <option value="0">Select Packaging</option>
                                     {packageTypes.map(e => (
                                         <option key={e.id} value={e.id}>
@@ -189,7 +191,8 @@ export const TeacherSupplyForm = (props) => {
                     SaveItem()
                     setItem(0)
                     setType(0)
-                    setItemNumber(0)
+                    setItemQuantity(0)
+                    setPackaging(0)
                     setItemName("")
                     setDescription("")
                 }}> Save Item </Button>
