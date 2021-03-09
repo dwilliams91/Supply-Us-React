@@ -8,8 +8,8 @@ export const PackageTypeProvider = (props) => {
 
     const [PackageTypes, setPackageType] = useState([])
 
-    const getPackageTypes = () => {
-        return fetch("http://localhost:8000/supplytypes", {
+    const getPackageTypes = (item) => {
+        return fetch(`http://localhost:8000/packagetypes/${item}/getRelatedPackageTypes`, {
         headers: {
             "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
         }

@@ -6,6 +6,7 @@ import { ClassListContext } from "../../DataProviders/ClassListProvider"
 import { ItemSearch } from "./ItemSearch"
 import "./TeacherSupply.css"
 import { Form, Row, Col, Button } from "react-bootstrap"
+import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
 
 export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
@@ -13,12 +14,12 @@ export const TeacherSupplyForm = (props) => {
     const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
     const { addClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
+    const {packageType, getPackageTypes}= useContext(PackageTypeContext)
 
     // defining the type and Item variables
     const [Type, setType] = useState(0)
     const [Item, setItem] = useState(0)
     const [ItemName, setItemName] = useState("")
-    const [packageType, setPackType] = useState("Number of")
     const [filteredSupplyItems, setFilteredSupplyItems] = useState([])
     const [ItemNumber, setItemNumber] = useState(0)
     const [description, setDescription] = useState("")
@@ -44,32 +45,32 @@ export const TeacherSupplyForm = (props) => {
 
     // check to see if the item bar has change, if it has change the item, but not to zero
     const ItemChangeField = (event) => {
-        let ItemSelected = parseInt(event.target.value)
-        console.log("Item Selected", ItemSelected)
+        let ItemSelected = parseInt(event.target.value)        
         if (ItemSelected !== 0) {
             setItem(ItemSelected)
+            getPackageTypes(event.target.value)
         } else {
             setItem(1)
         }
     }
 
     // re-render when there is a change in the item. Find the item to render on the dom by the number input button
-    useEffect(() => {
-        if (Item !== 0) {
-            setItemName(SupplyItems.find(e => e.id == parseInt(Item)))
-        }
-    }, [Item])
+    // useEffect(() => {
+    //     if (Item !== 0) {
+    //         setItemName(SupplyItems.find(e => e.id == parseInt(Item)))
+    //     }
+    // }, [Item])
 
     // re-render when there is a change in item name, check to see if the item comes in packaging
-    useEffect(() => {
-        if (ItemName.packaging === true) {
-            setPackType("Packs of ")
-        } else {
-            setPackType("Number of ")
-        }
-        // console.log(packageType)
+    // useEffect(() => {
+    //     if (ItemName.packaging === true) {
+    //         setPackType("Packs of ")
+    //     } else {
+    //         setPackType("Number of ")
+    //     }
+    //     // console.log(packageType)
 
-    }, [ItemName])
+    // }, [ItemName])
 
     // Save the item
     const SaveItem = () => {
