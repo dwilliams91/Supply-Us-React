@@ -8,7 +8,7 @@ export const TeacherSupplyTable=({myItem})=>{
         <>
         <tr className="TableRow">
             <td className="tableColumn Name">
-                {myItem.supplyItem.name}
+                {myItem.supply_item.name}
             </td>
             <td className="tableColumn Number">
                {myItem.number}

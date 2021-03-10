@@ -8,8 +8,13 @@ export const ClassListSupplyItemProvider= (props) => {
 
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
 
-    const getClassListSupplyItem = () => {
-        return fetch("http://localhost:8088/ClassListSupplyItems?_expand=supplyItem&_expand=classList")
+    const getClassListSupplyItem = (classId) => {
+        console.log("class id", classId)
+        return fetch(`http://localhost:8000/supplyitems/${classId}/classListSupplyItem`,{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            }
+        })
             .then(res => res.json())
             .then(setClassListSupplyItem)
     }

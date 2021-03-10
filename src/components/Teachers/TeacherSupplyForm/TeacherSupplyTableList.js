@@ -4,19 +4,16 @@ import { TeacherSupplyTable } from "./TeacherSupplyTable"
 import {Table} from "react-bootstrap"
 export const TeacherSupplyTableList = (props) => {
     const { classListSupplyItem, getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
-    const classId=props.location.state.chosenClass.id
-
+    const classId=parseInt(props.location.state.chosenClass.id)
+    
     useEffect(() => {
-        getClassListSupplyItem()
+        getClassListSupplyItem(classId)
     }, [])
     
-    useEffect(()=>{
-        getClassListSupplyItem()
-    },[])
+    
 
     return (
         <>
-        {/* {console.log("classId",classId)} */}
         <div className="TeacherSupplyTableContainer">
             <Table striped bordered hover className="TeacherSupplyTable">
                 
@@ -36,13 +33,12 @@ export const TeacherSupplyTableList = (props) => {
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    {/* {findClass()} */}
-                    {classListSupplyItem.filter(singleItem=>singleItem.classList.id===parseInt(classId)).map(singleItem=>{
+                {classListSupplyItem&&<tbody>
+                    {classListSupplyItem.map(singleItem=>{
                         return <TeacherSupplyTable key={singleItem.id} myItem={singleItem}/>
                     })}
 
-                </tbody>
+                </tbody>}
 
             </Table>
             </div>
