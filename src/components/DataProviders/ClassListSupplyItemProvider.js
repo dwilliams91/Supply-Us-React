@@ -9,7 +9,6 @@ export const ClassListSupplyItemProvider= (props) => {
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
 
     const getClassListSupplyItem = (classId) => {
-        console.log("class id", classId)
         return fetch(`http://localhost:8000/supplyitems/${classId}/classListSupplyItem`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
@@ -19,16 +18,18 @@ export const ClassListSupplyItemProvider= (props) => {
             .then(setClassListSupplyItem)
     }
 
-    const addClassListSupplyItem = classListsSupplyItem => {
-        return fetch("http://localhost:8088/ClassListSupplyItems", {
+    const addClassListSupplyItem = (newItem, classId) => {
+        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
             },
-            body: JSON.stringify(classListsSupplyItem)
+            body: JSON.stringify(newItem)
         })
-            .then(getClassListSupplyItem)
+            .then(getClassListSupplyItem(classId))
     }
+
     const deleteItem = ClassItemSupplyListId => {
         console.log(ClassItemSupplyListId)
         return fetch(`http://localhost:8088/ClassListSupplyItems/${ClassItemSupplyListId}`, {

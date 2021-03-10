@@ -79,15 +79,15 @@ export const TeacherSupplyForm = (props) => {
     
     const SaveItem = () => {
         const newItem = {
-            number: ItemQuantity,
-            supplyItemId: Item,
+            number: parseInt(ItemQuantity),
+            supplyItemId: parseInt(Item),
             description: description,
-            classListId: classId,
-            packaging: packaging
+            classListId: parseInt(classId),
+            packaging: parseInt(packaging)
         }
         console.log(newItem)
         if (parseInt(newItem.supplyItemId) !== 0) {
-            // addClassListSupplyItem(newItem).then(() => setItemQuantity(""))
+            addClassListSupplyItem(newItem, classId)
         } else {
             window.alert("Please select an Item")
 
