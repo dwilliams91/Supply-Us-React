@@ -10,9 +10,11 @@ export const TeacherAddItem = (props) => {
     const { SupplyTypes, getSupplyTypes, addSupplyType } = useContext(SupplyTypeContext)
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
-    const [Package, setPackage] = useState(false)
+    const [Package_name, setPackageName] = useState("")
+    let Package_list=[]
+    const [packageList, setPackageList]= useState(Package_list)
     const [editItem, setEditItem] = useState(0)
-    const Packaging = useRef(null)
+    
     const [editMode, setEditMode] = useState(false)
     const [newType, setNewType] = useState("")
 
@@ -32,12 +34,7 @@ export const TeacherAddItem = (props) => {
     }
 
     const PackageChangeField = (event) => {
-        console.log(event.target.checked)
-        if (event.target.checked === true) {
-            setPackage(true)
-        } else {
-            setPackage(false)
-        }
+        setPackageName(event.target.value)
     }
     const addingNewTypeChangeField = (event) => {
         setNewType(event.target.value)
@@ -51,23 +48,23 @@ export const TeacherAddItem = (props) => {
                 id: editItem,
                 typeId: parseInt(Type),
                 name: newItemName,
-                packaging: Package
+                // packaging: Package
             }
             updateItem(updatedItem).then(props.history.push("/teachers"))
         } else {
             const newItem = {
-                typeId: parseInt(Type),
+                supplyType: parseInt(Type),
                 name: newItemName,
-                packaging: Package
+                // packaging: Package
             }
             // make sure the item doesn't already exist
             const duplicateItemCheck = SupplyItems.find(e => e.name === newItem.name)
-            if (duplicateItemCheck) {
-                window.alert("This is already an item")
-            } else {
-                addSupplyItem(newItem).then(props.history.push("/teachers"))
+            // if (duplicateItemCheck) {
+            //     window.alert("This is already an item")
+            // } else {
+            //     addSupplyItem(newItem).then(props.history.push("/teachers"))
 
-            }
+            // }
         }
         // addSupplyItem(newItem)
     }
@@ -81,16 +78,17 @@ export const TeacherAddItem = (props) => {
             setEditMode(false)
             setType(0)
             setNewItemName("")
-            setPackage(false)
+            // setPackage(false)
         }
     }
+
     // if the edit Item changed, then get then input the values in the form
     useEffect(() => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
         if (ItemToEdit) {
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
-            setPackage(ItemToEdit.packaging)
+            // setPackage(ItemToEdit.packaging)
             setType(ItemToEdit.typeId)
         }
     }, [editItem])
@@ -103,10 +101,11 @@ export const TeacherAddItem = (props) => {
         console.log(newSupplyType)
         addSupplyType(newSupplyType).then(setType(newSupplyType.type))
     }
-
+    
 
     return (
         <>
+        {console.log(packageList)}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
@@ -160,12 +159,19 @@ export const TeacherAddItem = (props) => {
                             <input value={newItemName} onChange={newItemNameChangeField}></input>
                         </fieldset>
                         <fieldset>
-                            <p>Is it sold in Packs?</p>
-                            <label>Yes</label>
-                            <input type="checkbox" ref={Packaging} value={Package} onChange={PackageChangeField}></input>
-                            <label> No</label>
-                            <input type="checkbox"></input>
+                            
+                            <label> Package</label>
+                            <input   value={Package_name} onChange={PackageChangeField}></input>
+                            <Button type="submit" onClick={evt => {
+                            evt.preventDefault()
+                            
+                            setPackageList(packageList=>[...packageList, Package_name])
+                            setPackageName("")
+                        }}> Add packaging </Button>
                         </fieldset>
+                        <div>
+                            {packageList.map(singleItem=><p>{singleItem}</p>)}
+                        </div>
 
                         <Button type="submit" onClick={evt => {
                             evt.preventDefault()
