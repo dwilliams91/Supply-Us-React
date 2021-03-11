@@ -19,7 +19,7 @@ export const ClassListSupplyItemProvider= (props) => {
     }
 
     const addClassListSupplyItem = (newItem, classId) => {
-        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+        return fetch(`http://localhost:8000/supplyitems/addClassListSupplyItem`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
