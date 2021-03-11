@@ -18,7 +18,6 @@ export const TeacherSupplyTable=({myItem, classId})=>{
             </td>
             <td className="tableColumn DeleteButton">
                <Button  variant="outline-primary" size="sm"onClick={ ()=>{
-
                    deleteItem(myItem.id, classId)
                }
                }

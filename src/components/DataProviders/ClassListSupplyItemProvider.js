@@ -9,24 +9,25 @@ export const ClassListSupplyItemProvider= (props) => {
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
 
     const getClassListSupplyItem = (classId) => {
-        return fetch(`http://localhost:8000/supplyitems/${classId}/classListSupplyItem`,{
+        return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
-            }
+            },
+            body: JSON.stringify(classObject)
         })
             .then(res => res.json())
             .then(setClassListSupplyItem)
     }
 
     const addClassListSupplyItem = (newItem, classId) => {
-        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+        return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
             },
             body: JSON.stringify(newItem)
-        })
+        })  
             .then(getClassListSupplyItem(classId))
     }
 
@@ -35,7 +36,8 @@ export const ClassListSupplyItemProvider= (props) => {
         const itemToDelete={
             classListSupplyItemId:ClassItemSupplyListId
         }
-        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+        console.log(classId)
+        return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",

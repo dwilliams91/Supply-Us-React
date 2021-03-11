@@ -85,7 +85,7 @@ export const TeacherSupplyForm = (props) => {
             classListId: parseInt(classId),
             packaging: parseInt(packaging)
         }
-        console.log(newItem)
+        // console.log(newItem)
         if (parseInt(newItem.supplyItemId) !== 0) {
             addClassListSupplyItem(newItem, classId)
         } else {
