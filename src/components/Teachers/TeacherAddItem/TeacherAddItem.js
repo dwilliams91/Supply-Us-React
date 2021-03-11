@@ -11,7 +11,7 @@ export const TeacherAddItem = (props) => {
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
     const [Package_name, setPackageName] = useState("")
-    let Package_list=["50 count"]
+    let Package_list=[]
     const [packageList, setPackageList]= useState(Package_list)
     const [editItem, setEditItem] = useState(0)
     
@@ -105,6 +105,7 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
+        {console.log(packageList)}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
@@ -163,8 +164,8 @@ export const TeacherAddItem = (props) => {
                             <input   value={Package_name} onChange={PackageChangeField}></input>
                             <Button type="submit" onClick={evt => {
                             evt.preventDefault()
-                            Package_list.push(Package_name)
-                            setPackageList(Package_list)
+                            
+                            setPackageList(packageList=>[...packageList, Package_name])
                             setPackageName("")
                         }}> Add packaging </Button>
                         </fieldset>
