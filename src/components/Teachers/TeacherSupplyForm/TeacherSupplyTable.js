@@ -3,11 +3,9 @@ import { ClassListSupplyItemContext } from "../../DataProviders/ClassListSupplyI
 import { TeacherSupplyTableList } from "./TeacherSupplyTableList"
 import {Button} from "react-bootstrap"
 export const TeacherSupplyTable=({myItem, classId})=>{
-    const {classListSupplyItem, deleteItem, getClassListSupplyItem} = useContext(ClassListSupplyItemContext)
+    const { deleteItem, getClassListSupplyItem} = useContext(ClassListSupplyItemContext)
     // Here
-    useEffect(()=>{
-        console.log("state changed")
-    },[classListSupplyItem])  
+    
     return(
         <>
         <tr className="TableRow">

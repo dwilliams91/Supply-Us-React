@@ -29,7 +29,7 @@ export const ClassListSupplyItemProvider= (props) => {
             },
             body: JSON.stringify(newItem)
         })
-        .then(getClassListSupplyItem(classId))
+        .then(()=>getClassListSupplyItem(classId))
             
     }
 
@@ -46,7 +46,7 @@ export const ClassListSupplyItemProvider= (props) => {
             },
             body: JSON.stringify(itemToDelete)
         })
-        .then(getClassListSupplyItem(classId))
+        .then(()=>getClassListSupplyItem(classId))
             
     }
 

@@ -33,6 +33,7 @@ export const TeacherSupplyForm = (props) => {
         getClassLists()
             .then(getSupplyTypes)
             .then(getSupplyItems)
+            // .then(getClassListSupplyItem(classId))
     }, [])
 
     
@@ -190,7 +191,7 @@ export const TeacherSupplyForm = (props) => {
                     SaveItem()
                     setItem(0)
                     setType(0)
-                    setItemQuantity(0)
+                    setItemQuantity("")
                     setPackaging(0)
                     setItemName("")
                     setDescription("")
