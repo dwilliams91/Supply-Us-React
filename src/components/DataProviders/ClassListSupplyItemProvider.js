@@ -30,12 +30,20 @@ export const ClassListSupplyItemProvider= (props) => {
             .then(getClassListSupplyItem(classId))
     }
 
-    const deleteItem = ClassItemSupplyListId => {
-        console.log(ClassItemSupplyListId)
-        return fetch(`http://localhost:8088/ClassListSupplyItems/${ClassItemSupplyListId}`, {
-            method: "DELETE"
+    const deleteItem = (ClassItemSupplyListId, classId) => {
+        // create body to send in delete method so it know which item
+        const itemToDelete={
+            classListSupplyItemId:ClassItemSupplyListId
+        }
+        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            },
+            body: JSON.stringify(itemToDelete)
         })
-            .then(getClassListSupplyItem)
+            .then(getClassListSupplyItem(classId))
     }
     return (
         <ClassListSupplyItemContext.Provider value={{

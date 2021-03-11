@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import { ClassListSupplyItemContext } from "../../DataProviders/ClassListSupplyItemProvider"
 import { TeacherSupplyTableList } from "./TeacherSupplyTableList"
 import {Button} from "react-bootstrap"
-export const TeacherSupplyTable=({myItem})=>{
+export const TeacherSupplyTable=({myItem, classId})=>{
     const {deleteItem, getClassListSupplyItem} = useContext(ClassListSupplyItemContext)  
     return(
         <>
@@ -19,7 +19,7 @@ export const TeacherSupplyTable=({myItem})=>{
             <td className="tableColumn DeleteButton">
                <Button  variant="outline-primary" size="sm"onClick={ ()=>{
 
-                   deleteItem(myItem.id).then(()=>getClassListSupplyItem)
+                   deleteItem(myItem.id, classId)
                }
                }
                >delete</Button>
