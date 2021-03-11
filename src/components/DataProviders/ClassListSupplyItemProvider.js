@@ -1,15 +1,17 @@
 import React, { useState } from "react"
-
+let i=0
 
 export const ClassListSupplyItemContext = React.createContext()
 
 
 export const ClassListSupplyItemProvider= (props) => {
-
+    
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
 
     const getClassListSupplyItem = (classId) => {
-        return fetch(`http://localhost:8000/supplyitems/${classId}/classListSupplyItem`,{
+        i++
+        console.log("item is grabbed" ,i)
+        return fetch(`http://localhost:8000/supplyitems/${classId}/getSupplyLists`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
             }
@@ -19,7 +21,7 @@ export const ClassListSupplyItemProvider= (props) => {
     }
 
     const addClassListSupplyItem = (newItem, classId) => {
-        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+        return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -27,7 +29,8 @@ export const ClassListSupplyItemProvider= (props) => {
             },
             body: JSON.stringify(newItem)
         })
-            .then(getClassListSupplyItem(classId))
+        .then(()=>getClassListSupplyItem(classId))
+            
     }
 
     const deleteItem = (ClassItemSupplyListId, classId) => {
@@ -35,7 +38,7 @@ export const ClassListSupplyItemProvider= (props) => {
         const itemToDelete={
             classListSupplyItemId:ClassItemSupplyListId
         }
-        return fetch(`http://localhost:8000/supplyitems/1/classListSupplyItem`, {
+        return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -43,8 +46,10 @@ export const ClassListSupplyItemProvider= (props) => {
             },
             body: JSON.stringify(itemToDelete)
         })
-            .then(getClassListSupplyItem(classId))
+        .then(()=>getClassListSupplyItem(classId))
+            
     }
+
     return (
         <ClassListSupplyItemContext.Provider value={{
             ClassListSupplyItemProvider, classListSupplyItem, getClassListSupplyItem, addClassListSupplyItem, deleteItem

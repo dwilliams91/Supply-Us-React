@@ -12,7 +12,7 @@ export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
     const { SupplyTypes, getSupplyTypes } = useContext(SupplyTypeContext)
     const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
-    const { addClassListSupplyItem } = useContext(ClassListSupplyItemContext)
+    const { addClassListSupplyItem,getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
 
@@ -33,9 +33,10 @@ export const TeacherSupplyForm = (props) => {
         getClassLists()
             .then(getSupplyTypes)
             .then(getSupplyItems)
+            // .then(getClassListSupplyItem(classId))
     }, [])
 
-
+    
 
     // check to see if the type bar has changed, if it has set the type
     const TypeChangeField = (event) => {
@@ -55,7 +56,6 @@ export const TeacherSupplyForm = (props) => {
     }
 
     const NumberChangeField = (e) => {
-        console.log(e.target.value)
         if (e.target.value) {
             if (isNaN(e.target.value) !== true) {
                 setItemQuantity(e.target.value)
@@ -85,7 +85,7 @@ export const TeacherSupplyForm = (props) => {
             classListId: parseInt(classId),
             packaging: parseInt(packaging)
         }
-        console.log(newItem)
+        // console.log(newItem)
         if (parseInt(newItem.supplyItemId) !== 0) {
             addClassListSupplyItem(newItem, classId)
         } else {
@@ -191,7 +191,7 @@ export const TeacherSupplyForm = (props) => {
                     SaveItem()
                     setItem(0)
                     setType(0)
-                    setItemQuantity(0)
+                    setItemQuantity("")
                     setPackaging(0)
                     setItemName("")
                     setDescription("")

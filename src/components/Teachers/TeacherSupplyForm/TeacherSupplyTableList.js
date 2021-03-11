@@ -8,9 +8,7 @@ export const TeacherSupplyTableList = (props) => {
     
     useEffect(() => {
         getClassListSupplyItem(classId)
-    }, [])
-    
-    
+    }, [])    
 
     return (
         <>
