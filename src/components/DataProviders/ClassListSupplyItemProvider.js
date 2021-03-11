@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-let i=0
+
 
 export const ClassListSupplyItemContext = React.createContext()
 
@@ -9,8 +9,7 @@ export const ClassListSupplyItemProvider= (props) => {
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
 
     const getClassListSupplyItem = (classId) => {
-        i++
-        console.log("item is grabbed" ,i)
+        
         return fetch(`http://localhost:8000/supplyitems/${classId}/getSupplyLists`,{
             headers: {
                 "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
