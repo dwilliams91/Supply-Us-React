@@ -9,7 +9,10 @@ export const TeacherSupplyTableList = (props) => {
     useEffect(() => {
         getClassListSupplyItem(classId)
     }, [])
-    
+
+    useEffect(()=>{
+        console.log("state changed")
+    },[classListSupplyItem])
     
 
     return (

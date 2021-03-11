@@ -12,7 +12,7 @@ export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
     const { SupplyTypes, getSupplyTypes } = useContext(SupplyTypeContext)
     const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
-    const { addClassListSupplyItem } = useContext(ClassListSupplyItemContext)
+    const { addClassListSupplyItem,getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
 
@@ -35,7 +35,7 @@ export const TeacherSupplyForm = (props) => {
             .then(getSupplyItems)
     }, [])
 
-
+    
 
     // check to see if the type bar has changed, if it has set the type
     const TypeChangeField = (event) => {
@@ -55,7 +55,6 @@ export const TeacherSupplyForm = (props) => {
     }
 
     const NumberChangeField = (e) => {
-        console.log(e.target.value)
         if (e.target.value) {
             if (isNaN(e.target.value) !== true) {
                 setItemQuantity(e.target.value)
