@@ -29,6 +29,20 @@ export const SupplyItemsProvider = (props) => {
             .then(setSupplyItems)
     }
 
+    const getFilterbyNameSupplyItems = (searchTerm) => {
+        return fetch(`http://localhost:8000/supplyitems/searchfilter`,{
+            method: "POST",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(searchTerm)
+
+        })
+            .then(res => res.json())
+            .then(setSupplyItems)
+    }
+
     const addSupplyItem = supplyItem => {
         return fetch("http://localhost:8088/supplyItems", {
             method: "POST",
@@ -52,7 +66,7 @@ export const SupplyItemsProvider = (props) => {
 
     return (
         <SupplyItemContext.Provider value={{
-            SupplyItems, SupplyItemsProvider, getSupplyItems, searchTerms, setSearchTerms, addSupplyItem, updateItem, getFilterbyTypeSupplyItems
+            SupplyItems, SupplyItemsProvider, getSupplyItems, searchTerms, setSearchTerms, addSupplyItem, updateItem, getFilterbyTypeSupplyItems, getFilterbyNameSupplyItems
         }}>
             {props.children}
         </SupplyItemContext.Provider>
