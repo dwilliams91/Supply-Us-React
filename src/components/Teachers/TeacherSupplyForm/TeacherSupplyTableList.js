@@ -35,7 +35,7 @@ export const TeacherSupplyTableList = (props) => {
                 </thead>
                 {classListSupplyItem&&<tbody>
                     {classListSupplyItem.map(singleItem=>{
-                        return <TeacherSupplyTable key={singleItem.id} myItem={singleItem}/>
+                        return <TeacherSupplyTable key={singleItem.id} myItem={singleItem} classId={classId}/>
                     })}
 
                 </tbody>}
