@@ -4,7 +4,7 @@ import { SupplyTypeContext } from "../../DataProviders/SupplyTypeProvider"
 import "./TeacherAddItem.css"
 import { Button } from "react-bootstrap"
 import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
-
+import {PackageCard} from "./TeacherPackageCard"
 
 export const TeacherAddItem = (props) => {
     // set up all the things I will need
@@ -15,8 +15,7 @@ export const TeacherAddItem = (props) => {
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
     const [Package_name, setPackageName] = useState("")
-    let Package_list=[]
-    const [packageList, setPackageList]= useState(Package_list)
+    const [packageList, setPackageList]= useState([])
     const [editItem, setEditItem] = useState(0)
     
     const [editMode, setEditMode] = useState(false)
@@ -78,7 +77,10 @@ export const TeacherAddItem = (props) => {
     // if there is an item selected to edit, change the editItem, if not, set the variables back to default
     const EditSelected = (event) => {
         if (parseInt(event.target.value) !== 0) {
-            setEditItem(event.target.value)
+            getPackageTypes(event.target.value)
+            .then(setPackageList)
+            .then(setEditItem(event.target.value))
+            
         } else {
             setEditItem(0)
             setEditMode(false)
@@ -92,12 +94,17 @@ export const TeacherAddItem = (props) => {
     useEffect(() => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
         if (ItemToEdit) {
+            setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
             // setPackage(ItemToEdit.packaging)
-            setType(ItemToEdit.typeId)
+            setType(ItemToEdit.type)
+
         }
     }, [editItem])
+    useEffect(()=>{
+        setPackageList(packageTypes)
+    }, [packageTypes])
 
     // adding a new type
     const saveType = () => {
@@ -111,6 +118,7 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
+            {console.log(packageList)}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
@@ -175,7 +183,10 @@ export const TeacherAddItem = (props) => {
                         }}> Add packaging </Button>
                         </fieldset>
                         <div>
-                            {packageList.map(singleItem=><p>{singleItem}</p>)}
+                        {packageList.map(singleItem=>{
+                        return <PackageCard key={singleItem.id} singleItem={singleItem} />
+                             })}
+                            
                         </div>
 
                         <Button type="submit" onClick={evt => {
