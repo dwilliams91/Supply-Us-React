@@ -1,85 +1,70 @@
 import React, { useContext, useEffect, useRef, useState } from "react"
-import { UserTypeContext } from "../DataProviders/UserTypeDataProvider"
+import { Link, useHistory } from "react-router-dom"
 import "./Login.css"
 
 export const Register = (props) => {
-    const{userTypes, getUserTypes}=useContext(UserTypeContext)
     const firstName = useRef()
     const lastName = useRef()
     const email = useRef()
     const password = useRef()
     const verifyPassword = useRef()
     const passwordDialog = useRef()
-    const conflictDialog = useRef()
-    const [userType, setUserType] = useState(2)
-
-    useEffect(()=>{
-        getUserTypes()
-    },[])
-    const existingUserCheck = () => {
-        // If your json-server URL is different, please change it below!
-        return fetch(`http://localhost:8088/users?email=${email.current.value}`)
-            .then(_ => _.json())
-            .then(user => !!user.length)
-    }
+    const history = useHistory()
 
     const handleRegister = (e) => {
         e.preventDefault()
+
         if (password.current.value === verifyPassword.current.value) {
-            existingUserCheck()
-                .then((userExists) => {
-                    if (!userExists) {
-                        // If your json-server URL is different, please change it below!
-                        fetch("http://localhost:8088/users", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json"
-                            },
-                            body: JSON.stringify({
-                                email: email.current.value,
-                                password: password.current.value,
-                                userType: parseInt(userType),
-                                name: `${firstName.current.value} ${lastName.current.value}`
-                            })
-                        })
-                            .then(_ => _.json())
-                            .then(createdUser => {
-                                if (createdUser.hasOwnProperty("id")) {
-                                    // The user id is saved under the key app_user_id in local Storage. Change below if needed!
-                                    localStorage.setItem("app_user_id", createdUser.id)
-                                    localStorage.setItem("userType", createdUser.userType)
-                                    if (createdUser.userType === 1 || createdUser.userType===3) {
-                                        props.history.push("/teachers")
-                                    } else {
-                                        props.history.push("/customers")
-                                    }
-                                }
-                            })
-                    }
-                    else {
-                        conflictDialog.current.showModal()
+            const newUser = {
+                "first_name": firstName.current.value,
+                "last_name": lastName.current.value,
+                "email": email.current.value,
+                "username": email.current.value,
+                "password": password.current.value,
+                "created_on": Date.now(),
+                "active": true,
+                "date_joined": Date.now(),
+                "is_staff": true
+            }
+            
+
+            return fetch("http://localhost:8000/register", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(newUser)
+            })
+                .then(res => res.json())
+                .then(res => {
+                    if ("token" in res) {
+                    localStorage.setItem("supply_us_id", res.token)
+                    localStorage.setItem("is_staff", res.is_staff)
+                    history.push("/teachers")
                     }
                 })
         } else {
             passwordDialog.current.showModal()
         }
     }
-    const SelectUserType = (event) => {
-        setUserType(event.target.value)
-    }
+
+    
+    
+    
 
     return (
         <main style={{ textAlign: "center" }}>
-            {console.log(userTypes)}
+            
             <dialog className="dialog dialog--password" ref={passwordDialog}>
                 <div>Passwords do not match</div>
                 <button className="button--close" onClick={e => passwordDialog.current.close()}>Close</button>
             </dialog>
 
-            <dialog className="dialog dialog--password" ref={conflictDialog}>
+            {/* <dialog className="dialog dialog--password" ref={conflictDialog}>
                 <div>Account with that email address already exists</div>
                 <button className="button--close" onClick={e => conflictDialog.current.close()}>Close</button>
-            </dialog>
+            </dialog> */}
 
             <form className="form--login" onSubmit={handleRegister}>
                 <h1 className="h3 mb-3 font-weight-normal">Please Register for Application Name</h1>
@@ -92,15 +77,6 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="lastName"> Last Name </label>
                     <input ref={lastName} type="text" name="lastName" className="form-control" placeholder="Last name" required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="userType">Customer or Teacher</label>
-                    <select onChange={SelectUserType}>
-                        <option>Select Customer or Teacher</option>
-                        {userTypes.map(singleType=><option key={singleType.id} value={singleType.id}>{singleType.type}</option>)}
-                       
-
-                    </select>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email address </label>
@@ -120,6 +96,9 @@ export const Register = (props) => {
                 </div>
                 </div>
             </form>
+            <section className="link--register">
+                Already registered? <Link to="/login">Login</Link>
+            </section>
         </main>
     )
 }
