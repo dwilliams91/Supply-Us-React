@@ -20,6 +20,7 @@ export const ClassListSupplyItemProvider= (props) => {
     }
 
     const addClassListSupplyItem = (newItem, classId) => {
+        console.log(newItem)
         return fetch(`http://localhost:8000/supplyitems/manageSupplyLists`, {
             method: "POST",
             headers: {

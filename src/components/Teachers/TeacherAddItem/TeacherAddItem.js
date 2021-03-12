@@ -14,7 +14,7 @@ export const TeacherAddItem = (props) => {
 
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
-    const [Package_name, setPackageName] = useState("")
+    const [Package_name, setPackageName] = useState()
     const [packageList, setPackageList]= useState([])
     const [editItem, setEditItem] = useState(0)
     let counter=0
@@ -43,9 +43,10 @@ export const TeacherAddItem = (props) => {
         setNewType(event.target.value)
     }
     const addPackage=()=>{
-        
+        counter++
+        console.log(counter)
         let new_packaging={
-            id:counter++,
+            id:counter,
             type:Package_name
         }
         setPackageList(packageList=>[...packageList, new_packaging])
