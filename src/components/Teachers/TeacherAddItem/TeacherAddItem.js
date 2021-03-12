@@ -55,17 +55,19 @@ export const TeacherAddItem = (props) => {
             const newItem = {
                 supplyType: parseInt(Type),
                 name: newItemName,
-                // packaging: Package
+                package_types: packageList
             }
             // make sure the item doesn't already exist
             const duplicateItemCheck = SupplyItems.find(e => e.name === newItem.name)
-            // if (duplicateItemCheck) {
-            //     window.alert("This is already an item")
-            // } else {
-            //     addSupplyItem(newItem).then(props.history.push("/teachers"))
+            if (duplicateItemCheck) {
+                window.alert("This is already an item")
+            } else {
+                addSupplyItem(newItem).then(props.history.push("/teachers"))
 
-            // }
+            }
+            console.log(newItem)
         }
+       
         // addSupplyItem(newItem)
     }
 
@@ -105,7 +107,6 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
-        {console.log(packageList)}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
