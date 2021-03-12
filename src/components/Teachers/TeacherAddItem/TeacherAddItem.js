@@ -17,7 +17,7 @@ export const TeacherAddItem = (props) => {
     const [Package_name, setPackageName] = useState("")
     const [packageList, setPackageList]= useState([])
     const [editItem, setEditItem] = useState(0)
-    
+    let counter=0
     const [editMode, setEditMode] = useState(false)
     const [newType, setNewType] = useState("")
 
@@ -42,7 +42,15 @@ export const TeacherAddItem = (props) => {
     const addingNewTypeChangeField = (event) => {
         setNewType(event.target.value)
     }
-
+    const addPackage=()=>{
+        
+        let new_packaging={
+            id:counter++,
+            type:Package_name
+        }
+        setPackageList(packageList=>[...packageList, new_packaging])
+        setPackageName("")
+    }
     //    save an item
     const SaveItem = () => {
         // if its in edit mode, change the item, if not, create a new one
@@ -115,6 +123,18 @@ export const TeacherAddItem = (props) => {
         addSupplyType(newSupplyType).then(setType(newSupplyType.type))
     }
     
+    const myPackageCard=(singleItem)=>{
+    
+        return(
+            <>
+            <span><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
+            </>
+        )
+    }
+    const removePackagingType=(id)=>{
+        const newList = packageList.filter((item) => item.id !== id)
+        setPackageList(newList)
+    }
 
     return (
         <>
@@ -177,15 +197,12 @@ export const TeacherAddItem = (props) => {
                             <input   value={Package_name} onChange={PackageChangeField}></input>
                             <Button type="submit" onClick={evt => {
                             evt.preventDefault()
+                            addPackage()
                             
-                            setPackageList(packageList=>[...packageList, Package_name])
-                            setPackageName("")
                         }}> Add packaging </Button>
                         </fieldset>
                         <div>
-                        {packageList.map(singleItem=>{
-                        return <PackageCard key={singleItem.id} singleItem={singleItem} />
-                             })}
+                        {packageList.map(singleItem=>myPackageCard(singleItem))}
                             
                         </div>
 
