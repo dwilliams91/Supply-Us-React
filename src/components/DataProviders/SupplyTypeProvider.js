@@ -18,10 +18,11 @@ export const SupplyTypeProvider = (props) => {
             .then(setSupplyType)
     }
     const addSupplyType = supplyType => {
-        return fetch("http://localhost:8088/supplyTypes", {
+        return fetch("http://localhost:8000/supplytypes", {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
             },
             body: JSON.stringify(supplyType)
         })
