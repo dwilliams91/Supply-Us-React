@@ -44,9 +44,10 @@ export const SupplyItemsProvider = (props) => {
     }
 
     const addSupplyItem = supplyItem => {
-        return fetch("http://localhost:8088/supplyItems", {
+        return fetch("http://localhost:8000/supplyitems", {
             method: "POST",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(supplyItem)
