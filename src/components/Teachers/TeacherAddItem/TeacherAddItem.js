@@ -3,11 +3,15 @@ import { SupplyItemContext } from "../../DataProviders/SupplyItemProvider"
 import { SupplyTypeContext } from "../../DataProviders/SupplyTypeProvider"
 import "./TeacherAddItem.css"
 import { Button } from "react-bootstrap"
+import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
+
 
 export const TeacherAddItem = (props) => {
     // set up all the things I will need
     const { SupplyItems, getSupplyItems, addSupplyItem, updateItem } = useContext(SupplyItemContext)
     const { SupplyTypes, getSupplyTypes, addSupplyType } = useContext(SupplyTypeContext)
+    const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
+
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
     const [Package_name, setPackageName] = useState("")

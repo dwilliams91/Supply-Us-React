@@ -56,7 +56,8 @@ export const TeacherApplicationView = (props) => {
             </ClassListSupplyItemProvider>
             </ClassListProvider>
             </PackageTypeProvider>
-            
+
+            <PackageTypeProvider>
             <SupplyTypeProvider>
                 <SupplyItemsProvider>
             <Route path="/teachers/addItem" render={
@@ -64,6 +65,7 @@ export const TeacherApplicationView = (props) => {
             }/>
             </SupplyItemsProvider>
             </SupplyTypeProvider>
+            </PackageTypeProvider>
             <div className="LogoutButton">
             <Route render={props => <Logout {...props} />} />  
             </div> 
