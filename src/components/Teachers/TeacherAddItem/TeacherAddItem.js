@@ -3,18 +3,21 @@ import { SupplyItemContext } from "../../DataProviders/SupplyItemProvider"
 import { SupplyTypeContext } from "../../DataProviders/SupplyTypeProvider"
 import "./TeacherAddItem.css"
 import { Button } from "react-bootstrap"
+import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
+import {PackageCard} from "./TeacherPackageCard"
 
 export const TeacherAddItem = (props) => {
     // set up all the things I will need
     const { SupplyItems, getSupplyItems, addSupplyItem, updateItem } = useContext(SupplyItemContext)
     const { SupplyTypes, getSupplyTypes, addSupplyType } = useContext(SupplyTypeContext)
+    const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
+
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
-    const [Package_name, setPackageName] = useState("")
-    let Package_list=[]
-    const [packageList, setPackageList]= useState(Package_list)
+    const [Package_name, setPackageName] = useState()
+    const [packageList, setPackageList]= useState([])
     const [editItem, setEditItem] = useState(0)
-    
+    let counter=0
     const [editMode, setEditMode] = useState(false)
     const [newType, setNewType] = useState("")
 
@@ -39,7 +42,16 @@ export const TeacherAddItem = (props) => {
     const addingNewTypeChangeField = (event) => {
         setNewType(event.target.value)
     }
-
+    const addPackage=()=>{
+        counter++
+        console.log(counter)
+        let new_packaging={
+            id:counter,
+            type:Package_name
+        }
+        setPackageList(packageList=>[...packageList, new_packaging])
+        setPackageName("")
+    }
     //    save an item
     const SaveItem = () => {
         // if its in edit mode, change the item, if not, create a new one
@@ -74,7 +86,10 @@ export const TeacherAddItem = (props) => {
     // if there is an item selected to edit, change the editItem, if not, set the variables back to default
     const EditSelected = (event) => {
         if (parseInt(event.target.value) !== 0) {
-            setEditItem(event.target.value)
+            getPackageTypes(event.target.value)
+            .then(setPackageList)
+            .then(setEditItem(event.target.value))
+            
         } else {
             setEditItem(0)
             setEditMode(false)
@@ -88,12 +103,17 @@ export const TeacherAddItem = (props) => {
     useEffect(() => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
         if (ItemToEdit) {
+            setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
             // setPackage(ItemToEdit.packaging)
-            setType(ItemToEdit.typeId)
+            setType(ItemToEdit.type)
+
         }
     }, [editItem])
+    useEffect(()=>{
+        setPackageList(packageTypes)
+    }, [packageTypes])
 
     // adding a new type
     const saveType = () => {
@@ -104,9 +124,22 @@ export const TeacherAddItem = (props) => {
         addSupplyType(newSupplyType).then(setType(newSupplyType.type))
     }
     
+    const myPackageCard=(singleItem)=>{
+    
+        return(
+            <>
+            <span><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
+            </>
+        )
+    }
+    const removePackagingType=(id)=>{
+        const newList = packageList.filter((item) => item.id !== id)
+        setPackageList(newList)
+    }
 
     return (
         <>
+            {console.log(packageList)}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
@@ -165,13 +198,13 @@ export const TeacherAddItem = (props) => {
                             <input   value={Package_name} onChange={PackageChangeField}></input>
                             <Button type="submit" onClick={evt => {
                             evt.preventDefault()
+                            addPackage()
                             
-                            setPackageList(packageList=>[...packageList, Package_name])
-                            setPackageName("")
                         }}> Add packaging </Button>
                         </fieldset>
                         <div>
-                            {packageList.map(singleItem=><p>{singleItem}</p>)}
+                        {packageList.map(singleItem=>myPackageCard(singleItem))}
+                            
                         </div>
 
                         <Button type="submit" onClick={evt => {
