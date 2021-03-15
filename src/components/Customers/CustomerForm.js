@@ -11,7 +11,7 @@ export const CustomerForm = (props) => {
     const { Teachers, getTeachers } = useContext(TeacherContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
     const { userClasses, getUserClasses, addUserClasses } = useContext(UserClassesContext)
-    console.log("hi")
+   
     const [Teacher, setTeacher] = useState(0)
     const [Class, setClass] = useState(0)
     const [filteredClasses, setFilteredClasses] = useState([])
@@ -19,9 +19,9 @@ export const CustomerForm = (props) => {
 
     // initial render
     useEffect(() => {
-        getTeachers()
-            .then(getClassLists)
-            .then(getUserClasses)
+        
+        getClassLists()
+        // .then(()=>getUserClasses())
 
     }, [])
     //    if the dropdown menus change, change the state
@@ -32,24 +32,24 @@ export const CustomerForm = (props) => {
         setClass(event.target.value)
     }
     // this changes the second dropdown menu to match only the classes of the selected teacher
-    useEffect(() => {
-        const selectTeacherParsed = parseInt(Teacher)
+//     useEffect(() => {
+//         const selectTeacherParsed = parseInt(Teacher)
         
-        if (selectTeacherParsed === 0) {
-            classLists.sort(function (a, b) {
-                let firstItem = a.name.toUpperCase();
-                let secondItem = b.name.toUpperCase();
-                // if the first item is smaller, put it before. If the first item is bigger, put it after. 
-                return (firstItem < secondItem) ? -1 : (firstItem > secondItem) ? 1 : 0;
-            });
-            // console.log(finalArray)
+//         if (selectTeacherParsed === 0) {
+//             classLists.sort(function (a, b) {
+//                 let firstItem = a.name.toUpperCase();
+//                 let secondItem = b.name.toUpperCase();
+//                 // if the first item is smaller, put it before. If the first item is bigger, put it after. 
+//                 return (firstItem < secondItem) ? -1 : (firstItem > secondItem) ? 1 : 0;
+//             });
+//             // console.log(finalArray)
 
-            setFilteredClasses(classLists)
-        }
-     else {
-        setFilteredClasses(classLists.filter(e => e.userId === selectTeacherParsed))
-}
-    }, [Teacher, classLists])
+//             setFilteredClasses(classLists)
+//         }
+//      else {
+//         setFilteredClasses(classLists.filter(e => e.userId === selectTeacherParsed))
+// }
+//     }, [Teacher, classLists])
 
 // this adds the class
 const saveClasses = () => {
@@ -99,9 +99,9 @@ return (
                     <label>Add a Class to Your List</label>
                     <select id="ClassName" className="form-control" onChange={SecondHandleFieldChange} >
                         <option value="0">Select Class</option>
-                        {filteredClasses.map(e => (
+                        {classLists.map(e => (
                             <option key={e.id} value={e.id}>
-                                {e.name}
+                                {e.class_name}
                             </option>
                         ))}
                     </select>
