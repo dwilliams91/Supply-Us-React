@@ -38,10 +38,30 @@ export const ClassListProvider = (props) => {
         })
             .then(getClassLists)
     }
+    const joinClass = classLists => {
+        return fetch(`http://localhost:8000/classlists/joinClass`, {
+            method: "Post",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            },
+            body: JSON.stringify(classLists)
+        })
+            .then(getClassLists)
+    }
+    const leaveClass = classLists => {
+        return fetch(`http://localhost:8000/classlists/${classLists}/leaveClass`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            },
+        })
+            .then(getClassLists)
+    }
 
     return (
         <ClassListContext.Provider value={{
-            ClassListProvider, classLists, getClassLists, addClassList, deleteClassList
+            ClassListProvider, classLists, getClassLists, addClassList, deleteClassList, joinClass, leaveClass
         }}>
             {props.children}
         </ClassListContext.Provider>
