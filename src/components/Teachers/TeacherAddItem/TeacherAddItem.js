@@ -58,7 +58,7 @@ export const TeacherAddItem = (props) => {
         if (editMode) {
             const updatedItem = {
                 id: editItem,
-                typeId: parseInt(Type),
+                supplyType: parseInt(Type),
                 name: newItemName,
                 // packaging: Package
             }
@@ -106,7 +106,6 @@ export const TeacherAddItem = (props) => {
             setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
-            // setPackage(ItemToEdit.packaging)
             setType(ItemToEdit.type)
 
         }
@@ -139,7 +138,7 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
-            {console.log(packageList)}
+            {/* {console.log(packageList)} */}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
