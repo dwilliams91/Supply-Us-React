@@ -15,7 +15,9 @@ export const PackageTypeProvider = (props) => {
         }
     })
             .then(res => res.json())
-            .then(setPackageType)
+            .then((res)=>{setPackageType(res)
+            
+            return res})
     }
     
 

@@ -23,14 +23,24 @@ export const TeacherAddItem = (props) => {
 
     // initial render
     useEffect(() => {
-        setPackageList([])
-        setEditMode(false)
+        console.log("useEffect initial set")
         getSupplyItems()
-        getSupplyTypes()
-        setPackageName("")
-        console.log(packageList)
-        console.log(editMode)
+        .then(()=>getSupplyTypes())
     }, [])
+
+    useEffect(() => {
+        console.log("useEffect edit items")
+        const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
+        if (ItemToEdit) {
+            console.log("useEffect interior if logic")
+            setPackageList(packageTypes)
+            setEditMode(true)
+            setNewItemName(ItemToEdit.name)
+            setType(ItemToEdit.type)
+
+        }
+    }, [editItem])
+
 
 
     // if any field changes, change the variable so the state will always be ready
@@ -92,10 +102,12 @@ export const TeacherAddItem = (props) => {
 
     // if there is an item selected to edit, change the editItem, if not, set the variables back to default
     const EditSelected = (event) => {
+        
         if (parseInt(event.target.value) !== 0) {
-            getPackageTypes(event.target.value)
+            console.log("is this hitting")
+            getPackageTypes(parseInt(event.target.value))
             .then(setPackageList)
-            .then(setEditItem(event.target.value))
+            .then(()=>setEditItem(event.target.value))
             
         } else {
             setEditItem(0)
@@ -107,19 +119,7 @@ export const TeacherAddItem = (props) => {
     }
 
     // if the edit Item changed, then get then input the values in the form
-    useEffect(() => {
-        const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
-        if (ItemToEdit) {
-            setPackageList(packageTypes)
-            setEditMode(true)
-            setNewItemName(ItemToEdit.name)
-            setType(ItemToEdit.type)
-
-        }
-    }, [editItem])
-    useEffect(()=>{
-        setPackageList(packageTypes)
-    }, [packageTypes])
+   
 
     // adding a new type
     const saveType = () => {
@@ -129,20 +129,22 @@ export const TeacherAddItem = (props) => {
         console.log(newSupplyType)
         addSupplyType(newSupplyType).then(setType(newSupplyType.type))
     }
-    
-    const myPackageCard=(singleItem)=>{
-    
-        return(
-            <>
-            {console.log(packageList)}
-            <span><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
-            </>
-        )
-    }
+
     const removePackagingType=(id)=>{
         const newList = packageList.filter((item) => item.id !== id)
         setPackageList(newList)
     }
+
+    const myPackageCard=(singleItem)=>{
+        
+        return(
+            <>
+            {console.log(packageList)}
+            <span key={"singleItem"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
+            </>
+        )
+    }
+    
 
     return (
         <>
@@ -160,7 +162,7 @@ export const TeacherAddItem = (props) => {
                             <select id="SupplyType" value={editItem} className="form-control" onChange={EditSelected}>
                                 <option value="0">Select an Item</option>
                                 {SupplyItems.map(e => (
-                                    <option key={e.id} value={e.id}>
+                                    <option key={"supplyItem"+e.id} value={e.id}>
                                         {e.name}
                                     </option>
                                 ))}
@@ -181,7 +183,7 @@ export const TeacherAddItem = (props) => {
 
                                 <option value="0">Select Type</option>
                                 {SupplyTypes.map(e => (
-                                    <option key={e.id} value={e.id}>
+                                    <option key={"supplyType"+e.id} value={e.id}>
                                         {e.type}
                                     </option>
                                 ))}
