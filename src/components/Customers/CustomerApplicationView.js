@@ -11,7 +11,7 @@ import { CustomerTableList } from "./CustomerTableList"
 import {Row, Col} from "react-bootstrap"
 
 export const CustomerApplicationView = () => {
-    console.log("hi")
+    
     return (
         <>
         <div className="customerBackground">

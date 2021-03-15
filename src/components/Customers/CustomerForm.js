@@ -34,18 +34,7 @@ export const CustomerForm = (props) => {
     // this changes the second dropdown menu to match only the classes of the selected teacher
     useEffect(() => {
         const selectTeacherParsed = parseInt(Teacher)
-        // finalArray.sort(function(a, b) {
-        //     let firstItem = a.name.toUpperCase();
-        //     let secondItem = b.name.toUpperCase();
-        //     // if the first item is smaller, put it before. If the first item is bigger, put it after. 
-        //     return (firstItem < secondItem) ? -1 : (firstItem > secondItem) ? 1 : 0;
-        // });
-        // // console.log(finalArray)
-
-        // setFinalAddedArray(finalArray)
-        // }
-
-
+        
         if (selectTeacherParsed === 0) {
             classLists.sort(function (a, b) {
                 let firstItem = a.name.toUpperCase();
