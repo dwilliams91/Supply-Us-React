@@ -21,7 +21,6 @@ export const CustomerForm = (props) => {
     useEffect(() => {
         
         getClassLists()
-        // .then(()=>getUserClasses())
 
     }, [])
     //    if the dropdown menus change, change the state
@@ -31,27 +30,7 @@ export const CustomerForm = (props) => {
     const SecondHandleFieldChange = (event) => {
         setClass(event.target.value)
     }
-    // this changes the second dropdown menu to match only the classes of the selected teacher
-//     useEffect(() => {
-//         const selectTeacherParsed = parseInt(Teacher)
-        
-//         if (selectTeacherParsed === 0) {
-//             classLists.sort(function (a, b) {
-//                 let firstItem = a.name.toUpperCase();
-//                 let secondItem = b.name.toUpperCase();
-//                 // if the first item is smaller, put it before. If the first item is bigger, put it after. 
-//                 return (firstItem < secondItem) ? -1 : (firstItem > secondItem) ? 1 : 0;
-//             });
-//             // console.log(finalArray)
-
-//             setFilteredClasses(classLists)
-//         }
-//      else {
-//         setFilteredClasses(classLists.filter(e => e.userId === selectTeacherParsed))
-// }
-//     }, [Teacher, classLists])
-
-// this adds the class
+   
 const saveClasses = () => {
     // get the user from local storage
     const user = parseInt(localStorage.getItem("app_user_id"))
@@ -74,13 +53,13 @@ const displayAllLists = () => {
 
 }
 // if the classes you are a part of change, then the total table will re-render. 
-useEffect(() => {
-    const user = parseInt(localStorage.getItem("app_user_id"))
-    setMyClasses(userClasses.filter(e => e.userId === user))
-}, [userClasses])
+// useEffect(() => {
+//     const user = parseInt(localStorage.getItem("app_user_id"))
+//     setMyClasses(userClasses.filter(e => e.userId === user))
+// }, [userClasses])
 return (
     <>
-
+        {console.log(classLists)}
         <div className="CustomerForm">
             <h2>Find Your Classes</h2>
             <form>
@@ -112,11 +91,11 @@ return (
                 }}> Add Class</Button>
             </form>
             <h3>Your Classes</h3>
-            <div className="myClassesContainer">
-                {myClasses.map(singleClass => {
+            {classLists&&<div className="myClassesContainer">
+                {classLists.filter(oneClass=>oneClass.joined==true).map(singleClass => {
                     return <CustomerClassCards key={singleClass.id} myClass={singleClass} props={props}></CustomerClassCards>
                 })}
-            </div>
+            </div>}
             <Button onClick={event => { displayAllLists() }}>Display All Classes</Button>
         </div>
     </>

@@ -8,7 +8,7 @@ export const CustomerClassCards = ({ myClass, props }) => {
 
     return (
         <div className="CustomerClassesCard">
-            <p>{myClass.classList.name}</p>
+            {/* <p>{myClass.classList.name}</p> */}
             <Button variant="secondary" size="sm" onClick={() =>
 
                 deleteUserClasses(myClass.id).then(() => {
@@ -21,7 +21,7 @@ export const CustomerClassCards = ({ myClass, props }) => {
                 })}>Delete</Button>
             {/* {    console.log("myclass",myClass.classList.name)
 } */}
-            <Link to={{
+            {/* <Link to={{
                 pathname: `/customers/class${myClass.id}`,
                 state: {
                     chosenClassName: myClass.classList.name,
@@ -29,7 +29,7 @@ export const CustomerClassCards = ({ myClass, props }) => {
                 }
             }}>
                 <Button variant="success" size="sm">See only {myClass.classList.name}</Button>
-            </Link>
+            </Link> */}
         </div>
     )
 }
