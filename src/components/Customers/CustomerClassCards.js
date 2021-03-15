@@ -5,10 +5,10 @@ import { Button } from "react-bootstrap"
 
 export const CustomerClassCards = ({ myClass, props }) => {
     const { deleteUserClasses } = useContext(UserClassesContext)
-
+    console.log(myClass)
     return (
         <div className="CustomerClassesCard">
-            <p>{myClass.classList.name}</p>
+            <p>{myClass.class_name}</p>
             <Button variant="secondary" size="sm" onClick={() =>
 
                 deleteUserClasses(myClass.id).then(() => {
@@ -24,11 +24,11 @@ export const CustomerClassCards = ({ myClass, props }) => {
             <Link to={{
                 pathname: `/customers/class${myClass.id}`,
                 state: {
-                    chosenClassName: myClass.classList.name,
+                    chosenClassName: myClass.class_name,
                     chosenClass: myClass
                 }
             }}>
-                <Button variant="success" size="sm">See only {myClass.classList.name}</Button>
+                <Button variant="success" size="sm">See only {myClass.class_name}</Button>
             </Link>
         </div>
     )
