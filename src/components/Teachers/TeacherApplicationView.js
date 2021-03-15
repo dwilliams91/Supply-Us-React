@@ -11,7 +11,7 @@ import { TeacherSupplyTableList } from "./TeacherSupplyForm/TeacherSupplyTableLi
 import { Logout } from "../auth/Logout"
 import "../Teachers/TeacherSupplyForm/TeacherSupply.css"
 import { TeacherAddItem } from "./TeacherAddItem/TeacherAddItem"
-import {TeacherSupply} from "./TeacherSupply"
+import { TeacherSupply } from "./TeacherSupply"
 import { PackageTypeProvider } from "../DataProviders/PackageTypeProvider"
 
 export const TeacherApplicationView = (props) => {
@@ -22,54 +22,37 @@ export const TeacherApplicationView = (props) => {
     // }
     return (
         <>
-        <div className="teacherBackground">
-        <div className="flexLogoutButton">
-            <ClassListSupplyItemProvider>
-                <SupplyTypeProvider>
-                    <SupplyItemsProvider>
-                        <ClassListProvider>
-                            <Route exact path="/teachers">
-                                <TeacherClasses></TeacherClasses>
-                            </Route>
-                        </ClassListProvider>
-                    </SupplyItemsProvider>
-                </SupplyTypeProvider>
-            </ClassListSupplyItemProvider>
+            <div className="teacherBackground">
+                <div className="flexLogoutButton">
+                    <PackageTypeProvider>
+                        <ClassListSupplyItemProvider>
+                            <SupplyTypeProvider>
+                                <SupplyItemsProvider>
+                                    <ClassListProvider>
+                                        <Route exact path="/teachers">
+                                            <TeacherClasses></TeacherClasses>
+                                        </Route>
+                                        <Route exact path="/teachers/addClass" render={props => <TeacherClassForm {...props} />
+                                        } />
+                                        <Route exact path="/teachers/class:ClassListId(\d+)" render={
+                                            props => <TeacherSupply {...props} />
+                                        } />
+                                        <Route exact path="/teachers/addItem" render={
+                                            props => <TeacherAddItem {...props} />
+                                        } />
 
-            
-            <ClassListProvider>
-                <Route exact path="/teachers/addClass"  render={props=><TeacherClassForm {...props}/>
-                }/>
-            </ClassListProvider>
-           
-            <PackageTypeProvider>
-            <ClassListProvider>
-            <ClassListSupplyItemProvider>
-                <SupplyTypeProvider>
-                    <SupplyItemsProvider>
-                    <Route path="/teachers/class:ClassListId(\d+)" render={
-                                props => <TeacherSupply {...props} />
-                            } />
-                            
-                    </SupplyItemsProvider>
-                </SupplyTypeProvider>
-            </ClassListSupplyItemProvider>
-            </ClassListProvider>
-            </PackageTypeProvider>
 
-            <PackageTypeProvider>
-            <SupplyTypeProvider>
-                <SupplyItemsProvider>
-            <Route path="/teachers/addItem" render={
-                props => <TeacherAddItem {...props}/>
-            }/>
-            </SupplyItemsProvider>
-            </SupplyTypeProvider>
-            </PackageTypeProvider>
-            <div className="LogoutButton">
-            <Route render={props => <Logout {...props} />} />  
-            </div> 
-            </div>
+                                    </ClassListProvider>
+                                </SupplyItemsProvider>
+                            </SupplyTypeProvider>
+                        </ClassListSupplyItemProvider>
+                    </PackageTypeProvider>
+
+                    
+                    <div className="LogoutButton">
+                        <Route render={props => <Logout {...props} />} />
+                    </div>
+                </div>
             </div>
         </>
 
