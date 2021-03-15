@@ -1,72 +1,86 @@
 import { Route, Redirect } from "react-router-dom"
-import React from "react"
+import React, { useEffect } from "react"
 import { Login } from "./components/auth/Login"
 import { Register } from "./components/auth/Register"
 import { TeacherNavBar } from "./components/Teachers/TeacherNavBar/TeacherNavBar";
 import { TeacherApplicationView } from "./components/Teachers/TeacherApplicationView";
 import { CustomerApplicationView } from "./components/Customers/CustomerApplicationView";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Col, Row} from "react-bootstrap"
+import { Col, Row } from "react-bootstrap"
 
 
 import "./App.css"
 import { UserTypeProvider } from "./components/DataProviders/UserTypeDataProvider";
 function App() {
+const user_type=localStorage.getItem("is_staff")
+useEffect(()=>{
 
+},[user_type])
   return (
     <>
-    <header>
-      <h1>Supply Us</h1>
-      <div className="logo"></div>
-    </header>
+    
+      <header>
+        <h1>Supply Us</h1>
+        <div className="logo"></div>
+      </header>
+
+      <Route path="/login" render={props => <Login {...props} />} />
+    
+        <Route path="/register" render={props => <Register {...props} />} />
+      
+
       <Route render={() => {
         // The user id is saved under the key app_user_id in local Storage. Change below if needed!
-        if (localStorage.getItem("is_staff")) {
+        
+        if (localStorage.getItem("supply_us_id")) {
+          console.log(localStorage.getItem("is_staff"))
+          
+          if (localStorage.getItem("is_staff")) {
+            console.log("a teacher is logged in")
             return (
               <>
+
                 <Route render={props => <TeacherNavBar {...props} />} />
                 <Route render={props => <TeacherApplicationView {...props} />} />
               </>
             )
-
-          
-        } 
-        else if (parseInt(localStorage.getItem("userType")) === 2) {
-          return(
-          <>
-            {console.log("this is the customer")}
-            <Route render={props => <CustomerApplicationView {...props} />} />
-          </>
-          )}
+          }
+          else {
+            return (
+              <>
+                {console.log("a parent is logged in")}
+                <Route render={props => <CustomerApplicationView {...props} />} />
+              </>
+            )
+          }
+        }
+        
         else {
           return <Redirect to="/login" />
         }
       }} />
 
-      <Route path="/login" render={props => <Login {...props} />} />
-      <UserTypeProvider>
-      <Route path="/register" render={props => <Register {...props} />} />
-      </UserTypeProvider>
-    
-    <div className="footer">
-      <Row>
-      <Col className="logoFooter">
-      <p>Sponsored by:</p>
-      <p>The Nashville Software School</p>
-      <p>© 2020 Dwillz Inc | privacy</p>
-      </Col>
-      <Col>
-      <h4> Contact us</h4>
-      <p> Phone: 1800-867-5309</p>
-      <p> Email: supplyUs@supplyUs.com</p>
-      </Col>
-      <Col>
       
-      </Col>
-      </Row>
-    </div>
 
-      </>
+      <div className="footer">
+        <Row>
+          <Col className="logoFooter">
+            <p>Sponsored by:</p>
+            <p>The Nashville Software School</p>
+            <p>© 2020 Dwillz Inc | privacy</p>
+          </Col>
+          <Col>
+            <h4> Contact us</h4>
+            <p> Phone: 1800-867-5309</p>
+            <p> Email: supplyUs@supplyUs.com</p>
+          </Col>
+          <Col>
+
+          </Col>
+        </Row>
+      </div>
+
+    </>
   );
 }
 

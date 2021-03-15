@@ -33,6 +33,7 @@ export const TeacherSupplyForm = (props) => {
         getClassLists()
             .then(getSupplyTypes)
             .then(getSupplyItems)
+            
             // .then(getClassListSupplyItem(classId))
     }, [])
 
