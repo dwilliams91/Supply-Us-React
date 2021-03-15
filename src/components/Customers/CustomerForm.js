@@ -11,7 +11,7 @@ export const CustomerForm = (props) => {
     const { Teachers, getTeachers } = useContext(TeacherContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
     const { userClasses, getUserClasses, addUserClasses } = useContext(UserClassesContext)
-
+    console.log("hi")
     const [Teacher, setTeacher] = useState(0)
     const [Class, setClass] = useState(0)
     const [filteredClasses, setFilteredClasses] = useState([])

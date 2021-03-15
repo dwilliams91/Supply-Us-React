@@ -27,9 +27,9 @@ export const Login = props => {
             .then(res => {
                 if ("valid" in res && res.valid) {
                     localStorage.setItem("supply_us_id", res.token)
-                    localStorage.setItem("is_staff", res.is_staff)
-
+                    
                     if (res.is_staff){
+                        localStorage.setItem("is_staff", res.is_staff)
                         history.push("/teachers")}
                     else{
                         history.push("/customers")
