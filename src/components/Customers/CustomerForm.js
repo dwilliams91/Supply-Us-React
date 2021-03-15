@@ -9,7 +9,7 @@ import { Button } from 'react-bootstrap';
 export const CustomerForm = (props) => {
     // get all the things you will need
     const { Teachers, getTeachers } = useContext(TeacherContext)
-    const { classLists, getClassLists } = useContext(ClassListContext)
+    const { classLists, getClassLists, joinClass } = useContext(ClassListContext)
     const { userClasses, getUserClasses, addUserClasses } = useContext(UserClassesContext)
    
     const [Teacher, setTeacher] = useState(0)
@@ -37,14 +37,13 @@ const saveClasses = () => {
     // console.log(Class)
     // create an item on the join table with the ID of user and the classListId of the selected class
     const newItem = {
-        userId: user,
         classListId: parseInt(Class)
 
     }
     if (userClasses.find(singleClass => singleClass.userId === newItem.userId && singleClass.classListId === newItem.classListId)) {
         window.alert("You already have this class")
     } else {
-        addUserClasses(newItem)
+        joinClass(newItem)
     }
 }
 // this renders the table of all someones classes if they had been looking at individual class lists
