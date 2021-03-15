@@ -55,9 +55,11 @@ export const SupplyItemsProvider = (props) => {
             .then(getSupplyItems)
     }
     const updateItem = item => {
-        return fetch(`http://localhost:8088/supplyItems/${item.id}`, {
+        console.log(item)
+        return fetch(`http://localhost:8000/supplyitems/${item.id}`, {
             method: "PUT",
             headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`,
                 "Content-Type": "application/json"
             },
             body: JSON.stringify(item)

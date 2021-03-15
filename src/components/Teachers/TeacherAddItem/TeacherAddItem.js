@@ -11,10 +11,10 @@ export const TeacherAddItem = (props) => {
     const { SupplyItems, getSupplyItems, addSupplyItem, updateItem } = useContext(SupplyItemContext)
     const { SupplyTypes, getSupplyTypes, addSupplyType } = useContext(SupplyTypeContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
-
+    
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
-    const [Package_name, setPackageName] = useState()
+    const [Package_name, setPackageName] = useState("")
     const [packageList, setPackageList]= useState([])
     const [editItem, setEditItem] = useState(0)
     let counter=0
@@ -23,8 +23,13 @@ export const TeacherAddItem = (props) => {
 
     // initial render
     useEffect(() => {
+        setPackageList([])
+        setEditMode(false)
         getSupplyItems()
         getSupplyTypes()
+        setPackageName("")
+        console.log(packageList)
+        console.log(editMode)
     }, [])
 
 
@@ -58,10 +63,11 @@ export const TeacherAddItem = (props) => {
         if (editMode) {
             const updatedItem = {
                 id: editItem,
-                typeId: parseInt(Type),
+                supplyType: parseInt(Type),
                 name: newItemName,
-                // packaging: Package
+                package_types: packageList
             }
+            setPackageList([])
             updateItem(updatedItem).then(props.history.push("/teachers"))
         } else {
             const newItem = {
@@ -74,6 +80,7 @@ export const TeacherAddItem = (props) => {
             if (duplicateItemCheck) {
                 window.alert("This is already an item")
             } else {
+                setPackageList([])
                 addSupplyItem(newItem).then(props.history.push("/teachers"))
 
             }
@@ -106,7 +113,6 @@ export const TeacherAddItem = (props) => {
             setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
-            // setPackage(ItemToEdit.packaging)
             setType(ItemToEdit.type)
 
         }
@@ -128,6 +134,7 @@ export const TeacherAddItem = (props) => {
     
         return(
             <>
+            {console.log(packageList)}
             <span><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
             </>
         )
@@ -139,7 +146,7 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
-            {console.log(packageList)}
+            {/* {console.log(packageList)} */}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
