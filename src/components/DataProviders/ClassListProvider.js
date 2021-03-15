@@ -49,10 +49,19 @@ export const ClassListProvider = (props) => {
         })
             .then(getClassLists)
     }
+    const leaveClass = classLists => {
+        return fetch(`http://localhost:8000/classlists/${classLists}/leaveClass`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            },
+        })
+            .then(getClassLists)
+    }
 
     return (
         <ClassListContext.Provider value={{
-            ClassListProvider, classLists, getClassLists, addClassList, deleteClassList, joinClass
+            ClassListProvider, classLists, getClassLists, addClassList, deleteClassList, joinClass, leaveClass
         }}>
             {props.children}
         </ClassListContext.Provider>
