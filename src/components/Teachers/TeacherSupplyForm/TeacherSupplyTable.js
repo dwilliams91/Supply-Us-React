@@ -4,7 +4,6 @@ import { TeacherSupplyTableList } from "./TeacherSupplyTableList"
 import {Button} from "react-bootstrap"
 export const TeacherSupplyTable=({myItem, classId})=>{
     const { deleteItem, getClassListSupplyItem} = useContext(ClassListSupplyItemContext)
-    // Here
     
     return(
         <>
@@ -13,7 +12,7 @@ export const TeacherSupplyTable=({myItem, classId})=>{
                 {myItem.supply_item.name}
             </td>
             <td className="tableColumn Number">
-               {myItem.number}
+               <strong>{myItem.number}</strong> {myItem.package_type.type}
             </td>
             <td className="tableColumn Description">
                {myItem.description}

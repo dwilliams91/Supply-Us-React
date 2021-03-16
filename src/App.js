@@ -33,10 +33,8 @@ useEffect(()=>{
         // The user id is saved under the key app_user_id in local Storage. Change below if needed!
         
         if (localStorage.getItem("supply_us_id")) {
-          console.log(localStorage.getItem("is_staff"))
           
           if (localStorage.getItem("is_staff")) {
-            console.log("a teacher is logged in")
             return (
               <>
 
@@ -48,7 +46,6 @@ useEffect(()=>{
           else {
             return (
               <>
-                {console.log("a parent is logged in")}
                 <Route render={props => <CustomerApplicationView {...props} />} />
               </>
             )
