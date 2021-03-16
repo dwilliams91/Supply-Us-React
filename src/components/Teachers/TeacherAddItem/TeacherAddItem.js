@@ -104,10 +104,10 @@ export const TeacherAddItem = (props) => {
     const EditSelected = (event) => {
         
         if (parseInt(event.target.value) !== 0) {
-            console.log("is this hitting")
+            console.log(event.target.value)
             getPackageTypes(parseInt(event.target.value))
             .then(setPackageList)
-            .then(()=>setEditItem(event.target.value))
+            setEditItem(event.target.value)
             
         } else {
             setEditItem(0)
@@ -118,8 +118,6 @@ export const TeacherAddItem = (props) => {
         }
     }
 
-    // if the edit Item changed, then get then input the values in the form
-   
 
     // adding a new type
     const saveType = () => {
@@ -139,7 +137,7 @@ export const TeacherAddItem = (props) => {
         
         return(
             <>
-            {console.log(packageList)}
+            {/* {console.log(packageList)} */}
             <span key={"singleItem"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
             </>
         )
@@ -148,7 +146,7 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
-            {/* {console.log(packageList)} */}
+            {/* {console.log(editItem)} */}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
