@@ -6,7 +6,7 @@ import { Button, Collapse } from "react-bootstrap"
 export const CustomerTable = ({ myItem, visibility }) => {
     const [packageType, setPackageType] = useState("")
     const [open, setOpen]= useState(visibility)
-    console.log(visibility)
+    console.log(myItem)
 
 
     useEffect(() => {
@@ -28,11 +28,19 @@ export const CustomerTable = ({ myItem, visibility }) => {
 
             <tr className="TableRow">
                 <td colSpan="1" className="tableColumn Name">
-                    {myItem.name}
+                    {myItem.supplyItemName}
+                
                 </td>
-                <td colSpan="1" className="tableColumn Number">
-                    {myItem.number} {packageType}
+                
+                {myItem.packaging.map(singleItem=>
+                <tr>
+                    <td colSpan="1" className="tableColumn Number">
+                    <strong>{singleItem.number}</strong> <em>{singleItem.type}</em>
                 </td>
+                </tr>)
+                }
+                
+                
                 <td colSpan="6" className="tableColumn DeleteButton">
                     
                     <Button variant="outline-primary" size="sm"
@@ -45,7 +53,6 @@ export const CustomerTable = ({ myItem, visibility }) => {
                     <Collapse in={open}>
                         <div id="example-fade-text">
                         <ul>
-                        {myItem.descriptions.map(singleDescription => <li key={singleDescription.id}><strong> {singleDescription.singleListNumber}</strong> {singleDescription.description} for <strong>{singleDescription.className}</strong> </li>)}
                     </ul>
                         </div>
                     </Collapse>
