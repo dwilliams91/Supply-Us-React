@@ -7,6 +7,7 @@ export const ClassListSupplyItemContext = React.createContext()
 export const ClassListSupplyItemProvider= (props) => {
     
     const [classListSupplyItem, setClassListSupplyItem] = useState([])
+    const [combinedClassListSupplyItem, setCombinedClassListSupplyItem]=useState([])
 
     const getClassListSupplyItem = (classId) => {
         
@@ -49,10 +50,19 @@ export const ClassListSupplyItemProvider= (props) => {
         .then(()=>getClassListSupplyItem(classId))
             
     }
+    const getCombineClassListSupplyItem = (classId) => {
+        return fetch(`http://localhost:8000/supplyitems/addingLists`,{
+            headers: {
+                "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+            }
+        })
+            .then(res => res.json())
+            .then(setCombinedClassListSupplyItem)
+    }
 
     return (
         <ClassListSupplyItemContext.Provider value={{
-            ClassListSupplyItemProvider, classListSupplyItem, getClassListSupplyItem, addClassListSupplyItem, deleteItem
+            ClassListSupplyItemProvider, classListSupplyItem, getClassListSupplyItem, addClassListSupplyItem, deleteItem, combinedClassListSupplyItem, getCombineClassListSupplyItem
         }}>
             {props.children}
         </ClassListSupplyItemContext.Provider>
