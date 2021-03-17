@@ -19,6 +19,7 @@ const [listToDisplay, setListToDisplay]=useState([])
 
     return(
         <>
+        
         {/* {console.log(thisSingleClass)} */}
         <div className="CustomerTable">
         <h2></h2>
