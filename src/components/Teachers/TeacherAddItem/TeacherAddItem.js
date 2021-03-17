@@ -23,20 +23,19 @@ export const TeacherAddItem = (props) => {
 
     // initial render
     useEffect(() => {
-        console.log("useEffect initial set")
         getSupplyItems()
         .then(()=>getSupplyTypes())
     }, [])
 
     useEffect(() => {
-        console.log("useEffect edit items")
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
+        
         if (ItemToEdit) {
-            console.log("useEffect interior if logic")
+            console.log(ItemToEdit.type.id)
             setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
-            setType(ItemToEdit.type)
+            setType(ItemToEdit.type.id)
 
         }
     }, [editItem])
@@ -58,8 +57,7 @@ export const TeacherAddItem = (props) => {
         setNewType(event.target.value)
     }
     const addPackage=()=>{
-        counter++
-        console.log(counter)
+        
         let new_packaging={
             id:counter,
             type:Package_name
@@ -102,7 +100,6 @@ export const TeacherAddItem = (props) => {
 
     // if there is an item selected to edit, change the editItem, if not, set the variables back to default
     const EditSelected = (event) => {
-        
         if (parseInt(event.target.value) !== 0) {
             console.log(event.target.value)
             getPackageTypes(parseInt(event.target.value))
@@ -114,7 +111,6 @@ export const TeacherAddItem = (props) => {
             setEditMode(false)
             setType(0)
             setNewItemName("")
-            // setPackage(false)
         }
     }
 
@@ -146,7 +142,6 @@ export const TeacherAddItem = (props) => {
 
     return (
         <>
-            {/* {console.log(editItem)} */}
             <div className="h1Background">
             <h1 >Add or Edit an Item</h1>
             </div>
@@ -157,7 +152,7 @@ export const TeacherAddItem = (props) => {
 
                         <fieldset>
                             <label>Select an Item</label>
-                            <select id="SupplyType" value={editItem} className="form-control" onChange={EditSelected}>
+                            <select value={editItem} className="form-control" onChange={EditSelected}>
                                 <option value="0">Select an Item</option>
                                 {SupplyItems.map(e => (
                                     <option key={"supplyItem"+e.id} value={e.id}>
