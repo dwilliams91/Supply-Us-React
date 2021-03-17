@@ -23,7 +23,7 @@ export const CustomerTableList = () => {
      
             <div className="CustomerTable">
                 <h2>Your Supply List</h2>
-                <Table striped bordered hover>
+                <Table>
                     <thead>
                         <tr>
                             <th>Item</th>
