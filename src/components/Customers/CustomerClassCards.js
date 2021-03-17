@@ -19,8 +19,6 @@ export const CustomerClassCards = ({ myClass, props }) => {
                     }
                     
                 })}>Delete</Button>
-            {/* {    console.log("myclass",myClass.classList.name)
-} */}
             <Link to={{
                 pathname: `/customers/class${myClass.id}`,
                 state: {

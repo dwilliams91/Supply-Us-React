@@ -38,6 +38,7 @@ export const CustomerApplicationView = () => {
                 </TeacherProvider>
             </ClassListSupplyItemProvider>
             </Row>
+
             <Row>
             <TeacherProvider>
                 <ClassListSupplyItemProvider>
@@ -53,7 +54,6 @@ export const CustomerApplicationView = () => {
                                 props => <CustomerIndividualClassTableList {...props} />
                             } />
                             </Col>
-                           
                         </UserClassesProvider>
                     </ClassListProvider>
                 </ClassListSupplyItemProvider>

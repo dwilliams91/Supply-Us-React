@@ -13,7 +13,7 @@ const [listToDisplay, setListToDisplay]=useState([])
     
     useEffect(() => {
         getClassListSupplyItem(classId)
-    }, []) 
+    }, [classId]) 
 
     
 
