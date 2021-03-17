@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ClassListSupplyItemContext } from "../DataProviders/ClassListSupplyItemProvider"
 import { UserClassesContext } from "../DataProviders/UserClassesProvider"
+import { ClassListContext } from "../DataProviders/ClassListProvider"
+
 import { CustomerTable } from "./CustomerTable"
 import "./Customer.css"
 import { Table, Button } from "react-bootstrap"
 
 export const CustomerTableList = () => {
     const { userClasses, getUserClasses } = useContext(UserClassesContext)
+    const { classLists, getClassLists, joinClass } = useContext(ClassListContext)
 
     const { combinedClassListSupplyItem, getCombineClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const [OnlyMyClasses, setOnlyMyClasses] = useState([])
@@ -14,7 +17,7 @@ export const CustomerTableList = () => {
 
     useEffect(() => {
         getCombineClassListSupplyItem()
-    }, [])
+    }, [classLists])
 
 
 

@@ -24,9 +24,7 @@ export const CustomerForm = (props) => {
 
     }, [])
     //    if the dropdown menus change, change the state
-    const FirstHandleFieldChange = (event) => {
-        setTeacher(event.target.value)
-    }
+   
     const SecondHandleFieldChange = (event) => {
         setClass(event.target.value)
     }
@@ -44,6 +42,7 @@ const saveClasses = () => {
         window.alert("You already have this class")
     } else {
         joinClass(newItem)
+        setClass(0)
     }
 }
 // this renders the table of all someones classes if they had been looking at individual class lists
@@ -51,11 +50,7 @@ const displayAllLists = () => {
     props.history.push("/customers")
 
 }
-// if the classes you are a part of change, then the total table will re-render. 
-// useEffect(() => {
-//     const user = parseInt(localStorage.getItem("app_user_id"))
-//     setMyClasses(userClasses.filter(e => e.userId === user))
-// }, [userClasses])
+
 return (
     <>
         <div className="CustomerForm">
@@ -64,7 +59,7 @@ return (
                 
                 <fieldset>
                     <label>Add a Class to Your List</label>
-                    <select id="ClassName" className="form-control" onChange={SecondHandleFieldChange} >
+                    <select id="ClassName" value={Class} className="form-control" onChange={SecondHandleFieldChange} >
                         <option value="0">Select Class</option>
                         {classLists.map(e => (
                             <option key={e.id} value={e.id}>
@@ -76,6 +71,7 @@ return (
                 <Button type="submit" onClick={event => {
                     event.preventDefault()
                     saveClasses()
+                    setClass(0)
                 }}> Add Class</Button>
             </form>
             <h3>Your Classes</h3>
