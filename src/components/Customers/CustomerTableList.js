@@ -20,22 +20,20 @@ export const CustomerTableList = () => {
 
     return (
         <>
+     
             <div className="CustomerTable">
                 <h2>Your Supply List</h2>
                 <Table striped bordered hover>
                     <thead>
                         <tr>
-                            <th colSpan="1">
-                                Item
-                        </th>
-                            <th colSpan="1">
-                                Number
-                        </th>
-
+                            <th>Item</th>
+                            <th>Number</th>
+                            <th>Description</th>
                         </tr>
                     </thead>
+                    
                     {combinedClassListSupplyItem && <tbody>
-                        {combinedClassListSupplyItem.map(singleItem => <CustomerTable key={singleItem.Id} myItem={singleItem} visibility={visibility}></CustomerTable>)}
+                        {combinedClassListSupplyItem.map((singleItem, index) => <CustomerTable key={"singleItem"+index} myItem={singleItem} visibility={visibility}></CustomerTable>)}
 
                     </tbody>}
 
