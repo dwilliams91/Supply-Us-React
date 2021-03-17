@@ -6,7 +6,6 @@ import { ClassListContext } from "../DataProviders/ClassListProvider"
 
 export const CustomerClassCards = ({ myClass, props }) => {
     const { leaveClass } = useContext(ClassListContext)
-    console.log(myClass)
     return (
         <div className="CustomerClassesCard">
             <p>{myClass.class_name}</p>

@@ -58,7 +58,6 @@ const displayAllLists = () => {
 // }, [userClasses])
 return (
     <>
-        {console.log(classLists)}
         <div className="CustomerForm">
             <h2>Find Your Classes</h2>
             <form>
