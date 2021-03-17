@@ -4,24 +4,19 @@ import { useState } from "react"
 import { useRef } from "react"
 
 export const CustomerIndividualClassTable=({myItem})=>{
-    const [PackageString, setPackageString]=useState("")
-    useEffect(()=>{
-        if (myItem.supplyItem.packaging){
-            setPackageString(" packs")
-        }
-    },[])
+    
     // console.log(myItem.supplyItem.packaging)
     return(
         <>
         <tr className="TableRow">
             <td className="tableColumn Name">
-                {myItem.supplyItem.name}
+                {myItem.supply_item.name}
             </td>
             <td className="tableColumn Number">
-               {myItem.number} {PackageString}
+            <strong>{myItem.number}</strong> {myItem.package_type.type}
             </td>
             <td className="tableColumn Description">
-               {myItem.description}
+            {myItem.description}
             </td>
             
         </tr>

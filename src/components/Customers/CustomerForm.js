@@ -61,17 +61,7 @@ return (
         <div className="CustomerForm">
             <h2>Find Your Classes</h2>
             <form>
-                <fieldset>
-                    {/* <label>Select A Teacher</label> */}
-                    {/* <select value={Teacher} id="TeacherName" className="form-control" onChange={FirstHandleFieldChange}>
-                            <option value="0">Select Teacher</option>
-                            {Teachers.map(e => (
-                                <option key={e.id} value={e.id}>
-                                    {e.name}
-                                </option>
-                            ))}
-                        </select> */}
-                </fieldset>
+                
                 <fieldset>
                     <label>Add a Class to Your List</label>
                     <select id="ClassName" className="form-control" onChange={SecondHandleFieldChange} >
