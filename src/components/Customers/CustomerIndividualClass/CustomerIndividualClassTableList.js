@@ -9,33 +9,19 @@ const {classListSupplyItem, getClassListSupplyItem}=useContext(ClassListSupplyIt
 const {classLists, getClassLists}=useContext(ClassListContext)
 // const [classId, setClassId]=useState([])
 const [listToDisplay, setListToDisplay]=useState([])
-    const classId=props.location.state.chosenClass.classListId
-    const MyClass=props.location.state.chosenClassName
-    // console.log("my class is", MyClass)
+    const classId=parseInt(props.location.state.chosenClass.id)
     
     useEffect(() => {
-        // setClassId(props.location.state.chosenClass.classListId)
-        getClassLists().then(getClassListSupplyItem)
-    }, [])
+        getClassListSupplyItem(classId)
+    }, [classId]) 
 
-    useEffect(()=>{
-        const onlyMyItems=classListSupplyItem.filter(singleItem=>singleItem.classList.id===parseInt(classId))
-        if (onlyMyItems){
-        onlyMyItems.sort(function(a, b) {
-            let firstItem = a.supplyItem.name.toUpperCase();
-            let secondItem = b.supplyItem.name.toUpperCase();
-            // if the first item is smaller, put it before. If the first item is bigger, put it after. 
-            return (firstItem < secondItem) ? -1 : (firstItem > secondItem) ? 1 : 0;
-        });
-    }
-        setListToDisplay(onlyMyItems)
-    },[classListSupplyItem, classId])
+    
 
     return(
         <>
         {/* {console.log(thisSingleClass)} */}
         <div className="CustomerTable">
-        <h2>{MyClass}</h2>
+        <h2></h2>
             <Table striped bordered hover>
                 
                 <thead>
@@ -53,7 +39,7 @@ const [listToDisplay, setListToDisplay]=useState([])
                 </thead>
                 <tbody>
                     
-                    {listToDisplay.map(singleItem=>{
+                    {classListSupplyItem.map(singleItem=>{
                         return <CustomerIndividualClassTable key={singleItem.id} myItem={singleItem}/>
                     })}
 
