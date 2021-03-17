@@ -87,7 +87,11 @@ export const TeacherAddItem = (props) => {
             const duplicateItemCheck = SupplyItems.find(e => e.name === newItem.name)
             if (duplicateItemCheck) {
                 window.alert("This is already an item")
-            } else {
+            } 
+            else if(newItem.supplyType===0){
+                window.alert("Please select a type")
+            }
+            else {
                 setPackageList([])
                 addSupplyItem(newItem).then(props.history.push("/teachers"))
 
