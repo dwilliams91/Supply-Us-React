@@ -38,7 +38,6 @@ export const TeacherSupplyForm = (props) => {
     }, [])
 
     
-
     // check to see if the type bar has changed, if it has set the type
     const TypeChangeField = (event) => {
         getFilterbyTypeSupplyItems(event.target.value)
@@ -76,8 +75,6 @@ export const TeacherSupplyForm = (props) => {
         setPackaging(e.target.value)
     }
     
-
-    
     const SaveItem = () => {
         const newItem = {
             number: parseInt(ItemQuantity),
@@ -89,6 +86,7 @@ export const TeacherSupplyForm = (props) => {
         // console.log(newItem)
         if (parseInt(newItem.supplyItemId) !== 0) {
             addClassListSupplyItem(newItem, classId)
+            .then(()=>getFilterbyTypeSupplyItems(0))
         } else {
             window.alert("Please select an Item")
 
