@@ -4,7 +4,6 @@ import { SupplyTypeContext } from "../../DataProviders/SupplyTypeProvider"
 import "./TeacherAddItem.css"
 import { Button } from "react-bootstrap"
 import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
-import {PackageCard} from "./TeacherPackageCard"
 
 export const TeacherAddItem = (props) => {
     // set up all the things I will need
@@ -31,7 +30,6 @@ export const TeacherAddItem = (props) => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
         
         if (ItemToEdit) {
-            console.log(ItemToEdit.type.id)
             setPackageList(packageTypes)
             setEditMode(true)
             setNewItemName(ItemToEdit.name)
@@ -96,7 +94,6 @@ export const TeacherAddItem = (props) => {
                 addSupplyItem(newItem).then(props.history.push("/teachers"))
 
             }
-            console.log(newItem)
         }
        
         // addSupplyItem(newItem)
@@ -124,7 +121,6 @@ export const TeacherAddItem = (props) => {
         const newSupplyType = {
             type: newType
         }
-        console.log(newSupplyType)
         addSupplyType(newSupplyType).then(setType(newSupplyType.type))
     }
 
@@ -138,7 +134,7 @@ export const TeacherAddItem = (props) => {
         return(
             <>
             {/* {console.log(packageList)} */}
-            <span key={"singleItem"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
+            <span key={"singleItems"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
             </>
         )
     }
@@ -173,7 +169,6 @@ export const TeacherAddItem = (props) => {
                         <h3> To Add an Item</h3>
 
                         <fieldset>
-
 
                             <label>Select Type </label>
                             <select value={Type} id="SupplyType" className="form-control" onChange={TypeChangeField}>
