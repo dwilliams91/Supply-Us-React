@@ -130,12 +130,17 @@ export const TeacherAddItem = (props) => {
     }
 
     const myPackageCard=(singleItem)=>{
-        
         return(
             <>
-            {/* {console.log(packageList)} */}
             <span key={"singleItems"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
             </>
+        )
+    }
+    const onlyOnePackageType=(singleItem)=>{
+        return(
+        <>
+        <span key={"singleItems"+singleItem.id}><p>{singleItem.type}</p></span>
+        </>
         )
     }
     
@@ -204,7 +209,7 @@ export const TeacherAddItem = (props) => {
                         }}> Add packaging </Button>
                         </fieldset>
                         <div>
-                        {packageList.map(singleItem=>myPackageCard(singleItem))}
+                        { packageList.length>1 ? packageList.map(singleItem=>myPackageCard(singleItem)): packageList.map(singleItem=>onlyOnePackageType(singleItem))}
                             
                         </div>
 
