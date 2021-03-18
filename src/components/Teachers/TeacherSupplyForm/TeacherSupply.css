@@ -82,3 +82,7 @@ textarea{
     background-size: contain;
     background-image: url("https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1104&q=80");
 }
+.searchButtonFlex{
+    display:flex;
+    flex-wrap: wrap;
+}
