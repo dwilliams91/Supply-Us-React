@@ -10,6 +10,7 @@ export const Register = (props) => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
+    const [type, setType]=useState(0)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -24,10 +25,8 @@ export const Register = (props) => {
                 "created_on": Date.now(),
                 "active": true,
                 "date_joined": Date.now(),
-                "is_staff": true
+                "is_staff": type
             }
-            
-
             return fetch("http://localhost:8000/register", {
                 method: "POST",
                 headers: {
@@ -39,9 +38,9 @@ export const Register = (props) => {
                 .then(res => res.json())
                 .then(res => {
                     if ("token" in res) {
-                    localStorage.setItem("supply_us_id", res.token)
-                    localStorage.setItem("is_staff", res.is_staff)
-                    history.push("/teachers")
+                    // localStorage.setItem("supply_us_id", res.token)
+                    // localStorage.setItem("is_staff", res.is_staff)
+                    history.push("/login")
                     }
                 })
         } else {
@@ -49,7 +48,15 @@ export const Register = (props) => {
         }
     }
 
-    
+    const changeType=(event)=>{
+        if (event.target.value=="0"){
+            setType(0)
+        }
+        else {
+            setType(1)
+        }
+        
+    }
     
     
 
@@ -89,6 +96,13 @@ export const Register = (props) => {
                 <fieldset>
                     <label htmlFor="verifyPassword"> Verify Password </label>
                     <input ref={verifyPassword} type="password" name="verifyPassword" className="form-control" placeholder="Verify password" required />
+                </fieldset>
+                <fieldset>
+                    <label>Select Type</label>
+                    <select value={type} onChange={changeType}>
+                        <option  value="0">Parent</option>
+                        <option  value="1"> Teacher </option>
+                    </select>
                 </fieldset>
                 <fieldset>
                     <button type="submit"> Sign in </button>
