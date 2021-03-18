@@ -164,7 +164,7 @@ export const TeacherSupplyForm = (props) => {
                         </Row>
                         <Row>
                             <Col sm="5">
-                                <Form.Label>{ItemName.name}</Form.Label>
+                                <Form.Label>Number</Form.Label>
                             </Col>
                             <Col sm="">
                                 <Form.Control size="sm" type="text" name="number" value={ItemQuantity} onChange={NumberChangeField}>
