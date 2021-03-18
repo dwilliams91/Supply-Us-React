@@ -76,7 +76,6 @@ export const TeacherSupplyForm = (props) => {
     }
 
     const SaveItem = () => {
-        console.log(packaging)
 
         if (ItemQuantity && parseInt(Item) !==0 && parseInt(packaging) !==0) {
             const newItem = {
