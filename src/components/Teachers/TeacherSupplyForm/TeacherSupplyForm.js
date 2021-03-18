@@ -12,14 +12,14 @@ export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
     const { SupplyTypes, getSupplyTypes } = useContext(SupplyTypeContext)
     const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
-    const { addClassListSupplyItem,getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
+    const { addClassListSupplyItem, getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
     const { classLists, getClassLists } = useContext(ClassListContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
 
     // defining the type and Item variables
     const [Type, setType] = useState(0)
     const [Item, setItem] = useState(0)
-    const [packaging, setPackaging]=useState(0)
+    const [packaging, setPackaging] = useState(0)
     const [ItemName, setItemName] = useState("")
     const [filteredSupplyItems, setFilteredSupplyItems] = useState([])
     const [description, setDescription] = useState("")
@@ -33,11 +33,10 @@ export const TeacherSupplyForm = (props) => {
         getClassLists()
             .then(getSupplyTypes)
             .then(getSupplyItems)
-            
-            // .then(getClassListSupplyItem(classId))
+
+        // .then(getClassListSupplyItem(classId))
     }, [])
 
-    
 
     // check to see if the type bar has changed, if it has set the type
     const TypeChangeField = (event) => {
@@ -75,28 +74,29 @@ export const TeacherSupplyForm = (props) => {
     const PackageChangeField = (e) => {
         setPackaging(e.target.value)
     }
-    
 
-    
     const SaveItem = () => {
-        const newItem = {
-            number: parseInt(ItemQuantity),
-            supplyItemId: parseInt(Item),
-            description: description,
-            classListId: parseInt(classId),
-            packaging: parseInt(packaging)
-        }
-        // console.log(newItem)
-        if (parseInt(newItem.supplyItemId) !== 0) {
-            addClassListSupplyItem(newItem, classId)
-        } else {
-            window.alert("Please select an Item")
+        console.log(packaging)
 
+        if (ItemQuantity && parseInt(Item) !==0 && parseInt(packaging) !==0) {
+            const newItem = {
+                number: parseInt(ItemQuantity),
+                supplyItemId: parseInt(Item),
+                description: description,
+                classListId: parseInt(classId),
+                packaging: parseInt(packaging)
+            }
+            addClassListSupplyItem(newItem, classId)
+                .then(() => getFilterbyTypeSupplyItems(0))
+            
+        }
+        else {
+            window.alert("Please make sure that an item, number, and packaging are all selected")
         }
     }
     // this changes the values of the number and the description whenever one of them is changed
-    
-    
+
+
 
     return (
         <>
@@ -152,7 +152,7 @@ export const TeacherSupplyForm = (props) => {
                 <div className="borderAround">
                     <Form.Group>
                         <Row>
-                        <Col sm="">
+                            <Col sm="">
                                 <Form.Control className="Align-Left" size="sm" as="select" value={packaging} id="SupplyType" onChange={PackageChangeField}>
                                     <option value="0">Select Packaging</option>
                                     {packageTypes.map(e => (
