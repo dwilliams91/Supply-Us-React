@@ -89,6 +89,9 @@ export const TeacherAddItem = (props) => {
             else if (newItem.supplyType === 0) {
                 window.alert("Please select a type")
             }
+            else if(newItem.name==""){
+                window.alert("please put in an item name")
+            }
             else {
                 setPackageList([])
                 addSupplyItem(newItem).then(props.history.push("/teachers"))
