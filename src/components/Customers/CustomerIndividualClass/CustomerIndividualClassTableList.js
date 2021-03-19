@@ -6,11 +6,9 @@ import {Table} from "react-bootstrap"
 
 export const CustomerIndividualClassTableList=(props)=>{
 const {classListSupplyItem, getClassListSupplyItem}=useContext(ClassListSupplyItemContext)
-const {classLists, getClassLists}=useContext(ClassListContext)
-// const [classId, setClassId]=useState([])
-const [listToDisplay, setListToDisplay]=useState([])
-    const classId=parseInt(props.location.state.chosenClass.id)
-    
+
+const classId=parseInt(props.location.state.chosenClass.id)
+const thisClassName=props.location.state.chosenClassName
     useEffect(() => {
         getClassListSupplyItem(classId)
     }, [classId]) 
@@ -19,10 +17,8 @@ const [listToDisplay, setListToDisplay]=useState([])
 
     return(
         <>
-        
-        {/* {console.log(thisSingleClass)} */}
-        <div className="CustomerTable">
-        <h2></h2>
+                <div className="CustomerTable">
+        <h2>{thisClassName}</h2>
             <Table striped bordered hover>
                 
                 <thead>
