@@ -13,13 +13,10 @@ import "../Teachers/TeacherSupplyForm/TeacherSupply.css"
 import { TeacherAddItem } from "./TeacherAddItem/TeacherAddItem"
 import { TeacherSupply } from "./TeacherSupply"
 import { PackageTypeProvider } from "../DataProviders/PackageTypeProvider"
+import {Admin} from "./admin"
 
 export const TeacherApplicationView = (props) => {
-    // const userType=parseInt(localStorage.getItem("userType"))
-    // console.log("userType", userType)
-    // if (userType ===2){
-    //     props.history.push("/customers")
-    // }
+    
     return (
         <>
             <div className="teacherBackground">
@@ -39,6 +36,9 @@ export const TeacherApplicationView = (props) => {
                                         } />
                                         <Route exact path="/teachers/addItem" render={
                                             props => <TeacherAddItem {...props} />
+                                        } />
+                                        <Route exact path="/teachers/admin" render={
+                                            props => <Admin {...props} />
                                         } />
 
 
