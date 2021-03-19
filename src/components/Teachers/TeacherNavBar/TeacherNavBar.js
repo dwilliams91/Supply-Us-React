@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import "./TeacherNavBar.css"
 import { Navbar, Nav, Row, Col } from "react-bootstrap"
 export const TeacherNavBar = (props) => {
+    let admin=localStorage.getItem("is_superuser")
 
     return (
         <>
+        {admin==="true"? console.log("true"): console.log("not true")}
             <Navbar>
                 <Nav className="NavBarFlex">
                     <Row>
@@ -18,7 +20,10 @@ export const TeacherNavBar = (props) => {
                         </Col>
 
                         <Col lg="auto">
-                        <Link className="navbar__link" to="/teachers/addItem">Add an Item To the Database</Link>
+                        <Link className="navbar__link" to="/teachers/addItem">Add or Edit an Item the database</Link>
+                        </Col>
+                        <Col lg="auto">
+                        {admin==="true" ? <Link className="navbar__link" to="/teachers/admin">admin</Link> : <></>}
                         </Col>
                         </Row>
                 </Nav>

@@ -30,6 +30,7 @@ export const Login = props => {
                     
                     if (res.is_staff){
                         localStorage.setItem("is_staff", res.is_staff)
+                        localStorage.setItem("is_superuser", res.is_superuser)
                         history.push("/teachers")}
                     else{
                         history.push("/customers")
