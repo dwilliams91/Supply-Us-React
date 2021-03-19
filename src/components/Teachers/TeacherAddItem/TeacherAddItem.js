@@ -10,25 +10,25 @@ export const TeacherAddItem = (props) => {
     const { SupplyItems, getSupplyItems, addSupplyItem, updateItem } = useContext(SupplyItemContext)
     const { SupplyTypes, getSupplyTypes, addSupplyType } = useContext(SupplyTypeContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
-    
+
     const [Type, setType] = useState(0)
     const [newItemName, setNewItemName] = useState("")
     const [Package_name, setPackageName] = useState("")
-    const [packageList, setPackageList]= useState([])
+    const [packageList, setPackageList] = useState([])
     const [editItem, setEditItem] = useState(0)
-    let counter=0
+    let counter = 0
     const [editMode, setEditMode] = useState(false)
     const [newType, setNewType] = useState("")
 
     // initial render
     useEffect(() => {
         getSupplyItems()
-        .then(()=>getSupplyTypes())
+            .then(() => getSupplyTypes())
     }, [])
 
     useEffect(() => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
-        
+
         if (ItemToEdit) {
             setPackageList(packageTypes)
             setEditMode(true)
@@ -54,13 +54,13 @@ export const TeacherAddItem = (props) => {
     const addingNewTypeChangeField = (event) => {
         setNewType(event.target.value)
     }
-    const addPackage=()=>{
-        
-        let new_packaging={
-            id:counter,
-            type:Package_name
+    const addPackage = () => {
+
+        let new_packaging = {
+            id: counter,
+            type: Package_name
         }
-        setPackageList(packageList=>[...packageList, new_packaging])
+        setPackageList(packageList => [...packageList, new_packaging])
         setPackageName("")
     }
     //    save an item
@@ -85,8 +85,8 @@ export const TeacherAddItem = (props) => {
             const duplicateItemCheck = SupplyItems.find(e => e.name === newItem.name)
             if (duplicateItemCheck) {
                 window.alert("This is already an item")
-            } 
-            else if(newItem.supplyType===0){
+            }
+            else if (newItem.supplyType === 0) {
                 window.alert("Please select a type")
             }
             else {
@@ -95,7 +95,7 @@ export const TeacherAddItem = (props) => {
 
             }
         }
-       
+
         // addSupplyItem(newItem)
     }
 
@@ -104,9 +104,9 @@ export const TeacherAddItem = (props) => {
         if (parseInt(event.target.value) !== 0) {
             console.log(event.target.value)
             getPackageTypes(parseInt(event.target.value))
-            .then(setPackageList)
+                .then(setPackageList)
             setEditItem(event.target.value)
-            
+
         } else {
             setEditItem(0)
             setEditMode(false)
@@ -118,37 +118,43 @@ export const TeacherAddItem = (props) => {
 
     // adding a new type
     const saveType = () => {
-        const newSupplyType = {
-            type: newType
+        console.log(newType)
+        if (newType == "") {
+            window.alert("please type in a new type")
         }
-        addSupplyType(newSupplyType).then(setType(newSupplyType.type))
+        else {
+            const newSupplyType = {
+                type: newType
+            }
+            addSupplyType(newSupplyType).then(setType(newSupplyType.type))
+        }
     }
 
-    const removePackagingType=(id)=>{
+    const removePackagingType = (id) => {
         const newList = packageList.filter((item) => item.id !== id)
         setPackageList(newList)
     }
 
-    const myPackageCard=(singleItem)=>{
-        return(
+    const myPackageCard = (singleItem) => {
+        return (
             <>
-            <span key={"singleItems"+singleItem.id}><p>{singleItem.type}</p><button onClick={()=>removePackagingType(singleItem.id)}>delete</button></span>
+                <span key={"singleItems" + singleItem.id}><p>{singleItem.type}</p><button onClick={() => removePackagingType(singleItem.id)}>delete</button></span>
             </>
         )
     }
-    const onlyOnePackageType=(singleItem)=>{
-        return(
-        <>
-        <span key={"singleItems"+singleItem.id}><p>{singleItem.type}</p></span>
-        </>
+    const onlyOnePackageType = (singleItem) => {
+        return (
+            <>
+                <span key={"singleItems" + singleItem.id}><p>{singleItem.type}</p></span>
+            </>
         )
     }
-    
+
 
     return (
         <>
             <div className="h1Background">
-            <h1 >Add or Edit an Item</h1>
+                <h1 >Add or Edit an Item</h1>
             </div>
             <div className="AddItemContainer">
                 <div className="EditItemForm">
@@ -160,7 +166,7 @@ export const TeacherAddItem = (props) => {
                             <select value={editItem} className="form-control" onChange={EditSelected}>
                                 <option value="0">Select an Item</option>
                                 {SupplyItems.map(e => (
-                                    <option key={"supplyItem"+e.id} value={e.id}>
+                                    <option key={"supplyItem" + e.id} value={e.id}>
                                         {e.name}
                                     </option>
                                 ))}
@@ -180,7 +186,7 @@ export const TeacherAddItem = (props) => {
 
                                 <option value="0">Select Type</option>
                                 {SupplyTypes.map(e => (
-                                    <option key={"supplyType"+e.id} value={e.id}>
+                                    <option key={"supplyType" + e.id} value={e.id}>
                                         {e.type}
                                     </option>
                                 ))}
@@ -199,18 +205,18 @@ export const TeacherAddItem = (props) => {
                             <input value={newItemName} onChange={newItemNameChangeField}></input>
                         </fieldset>
                         <fieldset>
-                            
+
                             <label> Package</label>
-                            <input   value={Package_name} onChange={PackageChangeField}></input>
+                            <input value={Package_name} onChange={PackageChangeField}></input>
                             <Button type="submit" onClick={evt => {
-                            evt.preventDefault()
-                            addPackage()
-                            
-                        }}> Add packaging </Button>
+                                evt.preventDefault()
+                                addPackage()
+
+                            }}> Add packaging </Button>
                         </fieldset>
                         <div>
-                        { packageList.length>1 ? packageList.map(singleItem=>myPackageCard(singleItem)): packageList.map(singleItem=>onlyOnePackageType(singleItem))}
-                            
+                            {packageList.length > 1 ? packageList.map(singleItem => myPackageCard(singleItem)) : packageList.map(singleItem => onlyOnePackageType(singleItem))}
+
                         </div>
 
                         <Button type="submit" onClick={evt => {
