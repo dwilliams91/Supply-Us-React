@@ -14,6 +14,7 @@ import { TeacherAddItem } from "./TeacherAddItem/TeacherAddItem"
 import { TeacherSupply } from "./TeacherSupply"
 import { PackageTypeProvider } from "../DataProviders/PackageTypeProvider"
 import {Admin} from "./admin"
+import { AdminProvider } from "../DataProviders/adminProvider"
 
 export const TeacherApplicationView = (props) => {
     
@@ -37,9 +38,7 @@ export const TeacherApplicationView = (props) => {
                                         <Route exact path="/teachers/addItem" render={
                                             props => <TeacherAddItem {...props} />
                                         } />
-                                        <Route exact path="/teachers/admin" render={
-                                            props => <Admin {...props} />
-                                        } />
+                                        
 
 
                                     </ClassListProvider>
@@ -47,8 +46,12 @@ export const TeacherApplicationView = (props) => {
                             </SupplyTypeProvider>
                         </ClassListSupplyItemProvider>
                     </PackageTypeProvider>
-
                     
+                    <AdminProvider>
+                    <Route exact path="/teachers/admin" render={
+                        props => <Admin {...props} />
+                    } />
+                    </AdminProvider>
                     <div className="LogoutButton">
                         <Route render={props => <Logout {...props} />} />
                     </div>
