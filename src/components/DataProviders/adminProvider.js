@@ -5,13 +5,17 @@ export const AdminContext = React.createContext()
 
 
 export const AdminProvider= (props) => {
-    const [users, setUser] = useState([])
+    const [users, setUsers] = useState([])
 
 
     const getPendingTeachers = () => {
-        return fetch("http://localhost:8000/admin/getPendingTeacher")
+        return fetch("http://localhost:8000/admins/getPendingTeachers",{
+        headers: {
+            "Authorization": `Token ${localStorage.getItem("supply_us_id")}`
+        }
+    })
             .then(res => res.json())
-            .then(setUser)
+            .then(setUsers)
     }
     
     return (

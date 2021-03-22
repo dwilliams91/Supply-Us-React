@@ -1,18 +1,39 @@
-import React, { useContext, useState } from "react"
+import React, { useEffect, useContext, useState } from "react"
+import {AdminContext} from "../DataProviders/adminProvider"
 import { Form, Col, Row, Button } from "react-bootstrap"
 
 export const Admin = () => {
-    
+    const { users, getPendingTeachers } = useContext(AdminContext)
+    useEffect(() => {
+        getPendingTeachers()
+    }, [])
+
+    const userCard=(singleUser)=>{
+        return(
+            <>
+            <p>{singleUser.email}</p>
+            <button onClick={() => approval(singleUser.email)}>approve</button>
+            </>
+        )
+
+    }
+
+    const approval=(email)=>{
+        console.log(email)
+    }
 
     return (
         <>
             <div className="h1Background">
-            <h1 >Add a Class</h1>
+            <h1 >Pending Teachers</h1>
             </div>
             <div className="addClassCardContainer">
                 <div className="addClassCard">
                 <form className="TeacherClassForm">
-                    <h2 className="TeacherClassFormLabel">Class name</h2>
+                    {users.map(singleUser=>
+                    userCard(singleUser)
+                    
+                   )}
                     
                     
                 </form>
