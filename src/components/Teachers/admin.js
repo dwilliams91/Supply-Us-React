@@ -3,7 +3,7 @@ import {AdminContext} from "../DataProviders/adminProvider"
 import { Form, Col, Row, Button } from "react-bootstrap"
 
 export const Admin = () => {
-    const { users, getPendingTeachers } = useContext(AdminContext)
+    const { users, getPendingTeachers, ApproveTeacher } = useContext(AdminContext)
     useEffect(() => {
         getPendingTeachers()
     }, [])
@@ -19,8 +19,11 @@ export const Admin = () => {
     }
 
     const approval=(email)=>{
-        console.log(email)
-    }
+        const emailObject={
+            email:email
+        }
+        ApproveTeacher(emailObject)
+        }
 
     return (
         <>
