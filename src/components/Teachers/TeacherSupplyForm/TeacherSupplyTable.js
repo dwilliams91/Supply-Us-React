@@ -1,9 +1,8 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext } from "react"
 import { ClassListSupplyItemContext } from "../../DataProviders/ClassListSupplyItemProvider"
-import { TeacherSupplyTableList } from "./TeacherSupplyTableList"
 import {Button} from "react-bootstrap"
 export const TeacherSupplyTable=({myItem, classId})=>{
-    const { deleteItem, getClassListSupplyItem} = useContext(ClassListSupplyItemContext)
+    const { deleteItem} = useContext(ClassListSupplyItemContext)
     
     return(
         <>

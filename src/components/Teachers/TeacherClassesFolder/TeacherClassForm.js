@@ -7,7 +7,6 @@ export const TeacherClassForm = (props) => {
 
     // set user to logged in user and set the name so it can be used again
     const name = useRef(null)
-    const user = parseInt(localStorage.getItem("app_user_id"))
 
     // creates a new object with the name the person entered in the form. Dispatches it to the json
     const constructNewClass = () => {

@@ -10,7 +10,6 @@ import { Col, Row } from "react-bootstrap"
 
 
 import "./App.css"
-import { UserTypeProvider } from "./components/DataProviders/UserTypeDataProvider";
 function App() {
 const user_type=localStorage.getItem("is_staff")
 useEffect(()=>{

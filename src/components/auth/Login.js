@@ -42,28 +42,6 @@ export const Login = props => {
             })
     }
 
-    
-
-    //     existingUserCheck()
-    //         .then(exists => {
-    //             console.log(exists)
-    //             if (exists && exists.password === password.current.value) {
-    //                 // The user id is saved under the key app_user_id in local Storage. Change below if needed!
-    //                 localStorage.setItem("app_user_id", exists.id)
-    //                 localStorage.setItem("userType", exists.userType)
-    //                 if (exists.userType===1 || exists.userType===3){
-    //                     props.history.push("/teachers")
-    //                 } else {
-    //                     props.history.push("/customers")
-    //                 }
-    //             } else if (exists && exists.password !== password.current.value) {
-    //                 passwordDialog.current.showModal()
-    //             } else if (!exists) {
-    //                 existDialog.current.showModal()
-    //             }
-    //         })
-    // }
-
     return (
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>

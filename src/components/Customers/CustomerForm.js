@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react"
-import { TeacherContext } from "../DataProviders/TeacherDataProvider"
 import { ClassListContext } from "../DataProviders/ClassListProvider"
 import { UserClassesContext } from "../DataProviders/UserClassesProvider"
 import { CustomerClassCards } from "./CustomerClassCards"
@@ -8,20 +7,14 @@ import { Button } from 'react-bootstrap';
 
 export const CustomerForm = (props) => {
     // get all the things you will need
-    const { Teachers, getTeachers } = useContext(TeacherContext)
     const { classLists, getClassLists, joinClass } = useContext(ClassListContext)
-    const { userClasses, getUserClasses, addUserClasses } = useContext(UserClassesContext)
    
-    const [Teacher, setTeacher] = useState(0)
     const [Class, setClass] = useState(0)
-    const [filteredClasses, setFilteredClasses] = useState([])
-    const [myClasses, setMyClasses] = useState([])
+   
 
     // initial render
     useEffect(() => {
-        
         getClassLists()
-
     }, [])
     //    if the dropdown menus change, change the state
    
@@ -30,20 +23,16 @@ export const CustomerForm = (props) => {
     }
    
 const saveClasses = () => {
-    // get the user from local storage
-    const user = parseInt(localStorage.getItem("app_user_id"))
-    // console.log(Class)
+    
     // create an item on the join table with the ID of user and the classListId of the selected class
     const newItem = {
         classListId: parseInt(Class)
 
     }
-    if (userClasses.find(singleClass => singleClass.userId === newItem.userId && singleClass.classListId === newItem.classListId)) {
-        window.alert("You already have this class")
-    } else {
+    
         joinClass(newItem)
         setClass(0)
-    }
+    
 }
 // this renders the table of all someones classes if they had been looking at individual class lists
 const displayAllLists = () => {

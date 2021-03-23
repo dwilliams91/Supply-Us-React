@@ -28,7 +28,6 @@ export const TeacherAddItem = (props) => {
 
     useEffect(() => {
         const ItemToEdit = SupplyItems.find(e => e.id === parseInt(editItem))
-
         if (ItemToEdit) {
             setPackageList(packageTypes)
             setEditMode(true)

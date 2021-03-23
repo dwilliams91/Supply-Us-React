@@ -5,7 +5,7 @@ import {Button} from "react-bootstrap"
 
 export const TeacherClass = ({myClass}) => {
     const {deleteClassList}=useContext(ClassListContext)
-
+    
     return(
     <>
     <div className="classCard">
@@ -13,7 +13,7 @@ export const TeacherClass = ({myClass}) => {
             <Link to={{
                 pathname:`/teachers/class${myClass.id}`,
                 state:{
-                chosenClassName:myClass.name,
+                chosenClassName:myClass.class_name,
                 chosenClass:myClass
             }
                 }}>
