@@ -10,11 +10,20 @@ export const CustomerForm = (props) => {
    
     const [Class, setClass] = useState(0)
    
+    const [sortedClassList, setSortedClassList]=useState([])
 
     // initial render
     useEffect(() => {
         getClassLists()
     }, [])
+    // sort the classes
+    useEffect(()=>{
+        setSortedClassList(classLists.sort(function(a, b){
+            if(a.class_name < b.class_name) { return -1; }
+            if(a.class_name > b.class_name) { return 1; }
+            return 0;
+        }))
+    },[classLists])
     //    if the dropdown menus change, change the state
    
     const SecondHandleFieldChange = (event) => {
@@ -49,7 +58,7 @@ return (
                     <label>Add a Class to Your List</label>
                     <select id="ClassName" value={Class} className="form-control" onChange={SecondHandleFieldChange} >
                         <option value="0">Select Class</option>
-                        {classLists.map(e => (
+                        {sortedClassList.map(e => (
                             <option key={e.id} value={e.id}>
                                 {e.class_name}
                             </option>

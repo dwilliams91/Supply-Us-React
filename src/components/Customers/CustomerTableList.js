@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { ClassListSupplyItemContext } from "../DataProviders/ClassListSupplyItemProvider"
 import { ClassListContext } from "../DataProviders/ClassListProvider"
 
@@ -10,11 +10,20 @@ export const CustomerTableList = () => {
     const { classLists } = useContext(ClassListContext)
 
     const { combinedClassListSupplyItem, getCombineClassListSupplyItem } = useContext(ClassListSupplyItemContext)
-
+    const [alphabetizedCombinedList, setAlphabetizedCombinedList]= useState([])
     useEffect(() => {
         getCombineClassListSupplyItem()
+        
     }, [classLists])
 
+    useEffect(() => {
+        setAlphabetizedCombinedList(combinedClassListSupplyItem.sort(function(a, b){
+            if(a.supplyItemName < b.supplyItemName) { return -1; }
+            if(a.supplyItemName > b.supplyItemName) { return 1; }
+            return 0;
+        }))
+        
+    }, [combinedClassListSupplyItem])
 
 
     return (
@@ -31,8 +40,8 @@ export const CustomerTableList = () => {
                         </tr>
                     </thead>
                     
-                    {combinedClassListSupplyItem && <tbody>
-                        {combinedClassListSupplyItem.map((singleItem, index) => <CustomerTable key={"singleItem"+index} myItem={singleItem} ></CustomerTable>)}
+                    {alphabetizedCombinedList && <tbody>
+                        {alphabetizedCombinedList.map((singleItem, index) => <CustomerTable key={"singleItem"+index} myItem={singleItem} ></CustomerTable>)}
 
                     </tbody>}
 
