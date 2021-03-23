@@ -1,5 +1,4 @@
-import React, {useContext, useEffect, useState} from "react"
-import { ClassListContext } from "../../DataProviders/ClassListProvider"
+import React, {useContext, useEffect} from "react"
 import {ClassListSupplyItemContext} from "../../DataProviders/ClassListSupplyItemProvider"
 import {CustomerIndividualClassTable} from "./CustomerIndividualClassTable"
 import {Table} from "react-bootstrap"

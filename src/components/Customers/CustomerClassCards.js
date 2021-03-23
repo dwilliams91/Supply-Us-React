@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import { Link } from "react-router-dom"
-import { UserClassesContext } from "../DataProviders/UserClassesProvider"
 import { Button } from "react-bootstrap"
 import { ClassListContext } from "../DataProviders/ClassListProvider"
 

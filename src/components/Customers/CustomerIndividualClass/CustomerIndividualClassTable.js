@@ -1,7 +1,5 @@
-import React, { useContext } from "react"
-import { useEffect } from "react"
-import { useState } from "react"
-import { useRef } from "react"
+import React from "react"
+
 
 export const CustomerIndividualClassTable=({myItem})=>{
     

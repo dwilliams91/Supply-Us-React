@@ -11,21 +11,17 @@ import { PackageTypeContext } from "../../DataProviders/PackageTypeProvider"
 export const TeacherSupplyForm = (props) => {
     // getting the items from the providers
     const { SupplyTypes, getSupplyTypes } = useContext(SupplyTypeContext)
-    const { SupplyItems, searchTerms, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
-    const { addClassListSupplyItem, getClassListSupplyItem } = useContext(ClassListSupplyItemContext)
-    const { classLists, getClassLists } = useContext(ClassListContext)
+    const { SupplyItems, getSupplyItems, getFilterbyTypeSupplyItems } = useContext(SupplyItemContext)
+    const { addClassListSupplyItem} = useContext(ClassListSupplyItemContext)
+    const { getClassLists } = useContext(ClassListContext)
     const { packageTypes, getPackageTypes } = useContext(PackageTypeContext)
 
     // defining the type and Item variables
-    const [Type, setType] = useState(0)
     const [Item, setItem] = useState(0)
     const [packaging, setPackaging] = useState(0)
-    const [ItemName, setItemName] = useState("")
-    const [filteredSupplyItems, setFilteredSupplyItems] = useState([])
     const [description, setDescription] = useState("")
     const [ItemQuantity, setItemQuantity] = useState("")
     // SET UP STATE VARIABLE FOR NUMBER SET TO EMPTY STRING
-    const className = props.location.state.chosenClassName
     const classId = props.location.state.chosenClass.id
 
     // initial render
@@ -190,10 +186,8 @@ export const TeacherSupplyForm = (props) => {
                     evt.preventDefault()
                     SaveItem()
                     setItem(0)
-                    setType(0)
                     setItemQuantity("")
                     setPackaging(0)
-                    setItemName("")
                     setDescription("")
                 }}> Save Item </Button>
             </div>

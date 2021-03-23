@@ -7,7 +7,7 @@ export const TeacherNavBar = (props) => {
 
     return (
         <>
-        {admin==="true"? console.log("true"): console.log("not true")}
+        
             <Navbar>
                 <Nav className="NavBarFlex">
                     <Row>
