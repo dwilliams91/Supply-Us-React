@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState } from "react"
 import {AdminContext} from "../DataProviders/adminProvider"
-import { Form, Col, Row, Button } from "react-bootstrap"
 
 export const Admin = () => {
     const { users, getPendingTeachers, ApproveTeacher } = useContext(AdminContext)

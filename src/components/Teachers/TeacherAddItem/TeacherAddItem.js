@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import { SupplyItemContext } from "../../DataProviders/SupplyItemProvider"
 import { SupplyTypeContext } from "../../DataProviders/SupplyTypeProvider"
 import "./TeacherAddItem.css"
@@ -88,7 +88,7 @@ export const TeacherAddItem = (props) => {
             else if (newItem.supplyType === 0) {
                 window.alert("Please select a type")
             }
-            else if(newItem.name==""){
+            else if(newItem.name===""){
                 window.alert("please put in an item name")
             }
             else {
@@ -121,7 +121,7 @@ export const TeacherAddItem = (props) => {
     // adding a new type
     const saveType = () => {
         console.log(newType)
-        if (newType == "") {
+        if (newType === "") {
             window.alert("please type in a new type")
         }
         else {

@@ -3,8 +3,6 @@ import { Route } from "react-router-dom"
 import { Logout } from "../auth/Logout"
 import { ClassListProvider } from "../DataProviders/ClassListProvider"
 import { ClassListSupplyItemProvider } from "../DataProviders/ClassListSupplyItemProvider"
-import { TeacherProvider } from "../DataProviders/TeacherDataProvider"
-import { UserClassesProvider } from "../DataProviders/UserClassesProvider"
 import { CustomerForm } from "./CustomerForm"
 import { CustomerIndividualClassTableList } from "./CustomerIndividualClass/CustomerIndividualClassTableList"
 import { CustomerTableList } from "./CustomerTableList"
@@ -18,9 +16,7 @@ export const CustomerApplicationView = () => {
         <div className="CustomerContainer">
             <Row>  
             <ClassListSupplyItemProvider>
-                <TeacherProvider>
                     <ClassListProvider>
-                        <UserClassesProvider>
                         
                                 <Col lg="4">
                                 <Route exact path="/customers" render={props => <CustomerForm {...props} />} />
@@ -33,17 +29,13 @@ export const CustomerApplicationView = () => {
                                 </Col>
                             
                             
-                        </UserClassesProvider>
                     </ClassListProvider>
-                </TeacherProvider>
             </ClassListSupplyItemProvider>
             </Row>
 
             <Row>
-            <TeacherProvider>
                 <ClassListSupplyItemProvider>
                     <ClassListProvider>
-                        <UserClassesProvider>
                         <Col lg="4">
                         <Route path="/customers/class:ClassListId(\d+)" render={
                                 props => <CustomerForm {...props} />
@@ -54,10 +46,9 @@ export const CustomerApplicationView = () => {
                                 props => <CustomerIndividualClassTableList {...props} />
                             } />
                             </Col>
-                        </UserClassesProvider>
+                        
                     </ClassListProvider>
                 </ClassListSupplyItemProvider>
-            </TeacherProvider>
             </Row>
             </div>
             

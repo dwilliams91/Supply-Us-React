@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react"
 import { ClassListContext } from "../DataProviders/ClassListProvider"
-import { UserClassesContext } from "../DataProviders/UserClassesProvider"
 import { CustomerClassCards } from "./CustomerClassCards"
 import "./Customer.css"
 import { Button } from 'react-bootstrap';
@@ -65,7 +64,7 @@ return (
             </form>
             <h3>Your Classes</h3>
             {classLists&&<div className="myClassesContainer">
-                {classLists.filter(oneClass=>oneClass.joined==true).map(singleClass => {
+                {classLists.filter(oneClass=>oneClass.joined===true).map(singleClass => {
                     return <CustomerClassCards key={singleClass.id} myClass={singleClass} props={props}></CustomerClassCards>
                 })}
             </div>}

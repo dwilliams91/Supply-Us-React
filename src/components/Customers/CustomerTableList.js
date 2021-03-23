@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react"
+import React, { useContext, useEffect } from "react"
 import { ClassListSupplyItemContext } from "../DataProviders/ClassListSupplyItemProvider"
 import { ClassListContext } from "../DataProviders/ClassListProvider"
 
@@ -7,7 +7,7 @@ import "./Customer.css"
 import { Table } from "react-bootstrap"
 
 export const CustomerTableList = () => {
-    const { classLists, getClassLists, joinClass } = useContext(ClassListContext)
+    const { classLists } = useContext(ClassListContext)
 
     const { combinedClassListSupplyItem, getCombineClassListSupplyItem } = useContext(ClassListSupplyItemContext)
 
