@@ -20,7 +20,7 @@ export const TeacherNavBar = (props) => {
                         </Col>
 
                         <Col lg="auto">
-                        <Link className="navbar__link" to="/teachers/addItem">Add or Edit an Item the database</Link>
+                        <Link className="navbar__link" to="/teachers/addItem">Manage Item Database</Link>
                         </Col>
                         <Col lg="auto">
                         {admin==="true" ? <Link className="navbar__link" to="/teachers/admin">admin</Link> : <></>}

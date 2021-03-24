@@ -48,9 +48,11 @@ export const Login = props => {
                 <div>Email or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
             </dialog>
-            <section>
+            <h1>Supply Us</h1>
+            <section className="loginContainer">
+                <div className="loginCard">
                 <form className="form--login" onSubmit={handleLogin}>
-                    <h1>Level Up</h1>
+                    
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
@@ -66,6 +68,7 @@ export const Login = props => {
                         <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
                     </fieldset>
                 </form>
+                </div>
             </section>
             <section className="link--register">
                 <Link to="/register">Not a member yet?</Link>
