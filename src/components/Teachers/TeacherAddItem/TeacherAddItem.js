@@ -140,14 +140,18 @@ export const TeacherAddItem = (props) => {
     const myPackageCard = (singleItem) => {
         return (
             <>
-                <span key={"singleItems" + singleItem.id}><p>{singleItem.type}</p><button onClick={() => removePackagingType(singleItem.id)}>delete</button></span>
+            <div className="packageCard">
+                <span  key={"singleItems" + singleItem.id}><p>{singleItem.type}</p><Button  size="sm" variant="outline-warning" onClick={() => removePackagingType(singleItem.id)}>delete</Button></span>
+                </div>
             </>
         )
     }
     const onlyOnePackageType = (singleItem) => {
         return (
             <>
+            <div className="packageCard">
                 <span key={"singleItems" + singleItem.id}><p>{singleItem.type}</p></span>
+            </div>
             </>
         )
     }

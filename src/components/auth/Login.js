@@ -54,7 +54,7 @@ export const Login = props => {
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email" id="email" className="form-control" defaultValue="david@david.com" placeholder="Email address" required autoFocus />
+                        <input ref={email} type="email" id="email" className="form-control" defaultValue="parent@parent.com" placeholder="Email address" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>

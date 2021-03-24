@@ -24,3 +24,7 @@
     box-shadow: 5px 5px 0px 2px #00a5d4;
 
 }
+.packageCard{
+    border: 1px solid black;
+    margin: 2px 
+}
