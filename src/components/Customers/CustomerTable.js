@@ -12,10 +12,10 @@ export const CustomerTable = ({ myItem }) => {
 
                 
                     <tr key={"singleItem" + index}>
-                        <td><strong>{singleItem.number}</strong> <em>{singleItem.type}</em></td>
+                        <td><strong>{singleItem.number}</strong>- <em>{singleItem.type}</em></td>
                         <td>
                             <ul>
-                                {singleItem.instance.map((singleInstance, index) => <li key={"singleInstance" + index}>{singleInstance.number} {singleInstance.description} for {singleInstance.className}</li>)}
+                                {singleItem.instance.map((singleInstance, index) => <li key={"singleInstance" + index}>{singleInstance.number} - {singleInstance.description} for <strong>{singleInstance.className}</strong></li>)}
                             </ul>
                         </td>
                     </tr>
