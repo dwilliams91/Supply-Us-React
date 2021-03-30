@@ -10,6 +10,7 @@ export const Register = (props) => {
     const verifyPassword = useRef()
     const passwordDialog = useRef()
     const history = useHistory()
+    const teacherCode= useRef()
     const [type, setType]=useState(0)
 
     const handleRegister = (e) => {
@@ -25,7 +26,8 @@ export const Register = (props) => {
                 "created_on": Date.now(),
                 "active": true,
                 "date_joined": Date.now(),
-                "is_staff": type
+                "is_staff": type,
+                "teacher_code":teacherCode.current.value
             }
             return fetch("http://localhost:8000/register", {
                 method: "POST",
@@ -57,7 +59,17 @@ export const Register = (props) => {
         }
         
     }
-    
+
+    const teacherCodeField=()=>{
+        return(
+            <fieldset>
+                    <label> Activation Code </label>
+                    <p className="TeacherWarning">(for immediate access. If you do not have a code, you will need to wait for your account to be approved)</p>
+                    <input ref={teacherCode} type="text" name="teacherCode" className="form-control" placeholder="" />
+                </fieldset>
+        )
+    }
+     
     
 
     return (
@@ -99,6 +111,9 @@ export const Register = (props) => {
                         <option  value="1"> Teacher </option>
                     </select>
                 </fieldset>
+                <div>
+                    {type==1 ? teacherCodeField():<></>}
+                </div>
                 <fieldset>
                     <button type="submit"> Sign in </button>
                 </fieldset>
