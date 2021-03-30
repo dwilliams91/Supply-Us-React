@@ -26,7 +26,8 @@ export const Register = (props) => {
                 "created_on": Date.now(),
                 "active": true,
                 "date_joined": Date.now(),
-                "is_staff": type
+                "is_staff": type,
+                "teacher_code":teacherCode.current.value
             }
             return fetch("http://localhost:8000/register", {
                 method: "POST",
@@ -62,7 +63,7 @@ export const Register = (props) => {
     const teacherCodeField=()=>{
         return(
             <fieldset>
-                    <label>Teacher Activation Code </label>
+                    <label> Activation Code </label>
                     <p className="TeacherWarning">(for immediate access. If you do not have a code, you will need to wait for your account to be approved)</p>
                     <input ref={teacherCode} type="text" name="teacherCode" className="form-control" placeholder="" />
                 </fieldset>
