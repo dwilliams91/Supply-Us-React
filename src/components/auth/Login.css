@@ -20,8 +20,8 @@
 } */
 
 .registerContainer{
-    min-height: 700px;
-    max-height: 700px;
+    min-height: 800px;
+    max-height: 800px;
     background-color: #007cba;
     margin: 0px 50px 0px 50px;
     border-radius: 25px;
@@ -31,8 +31,11 @@
     justify-content: space-evenly;
 }
 .registerCard{
-    padding:25px;
+    padding:15px;
     background-color: white;
     border-radius: 25px;
     flex-basis: 40%;
+}
+.TeacherWarning{
+    font-size: small;
 }
